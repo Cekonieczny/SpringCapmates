@@ -1,9 +1,8 @@
-package com.capgemini.jst.transferObjects;
+package com.capgemini.jst.SpringCapmates.transferObjects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.capgemini.jst.data.User;
+import com.capgemini.jst.SpringCapmates.data.User;
 @Component
 public class UserMapper {
 	

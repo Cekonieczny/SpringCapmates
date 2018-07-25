@@ -1,4 +1,4 @@
-package com.example.capgemini.jst.SpringCapmates;
+package com.capgemini.jst.SpringCapmates;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class TestAspect {
 	private static final Logger LOGGER= LoggerFactory.getLogger(TestAspect.class);
 	
-	@Before("execution(* com.capgemini.jst.repositories.HistoryDao.*.*(..))")
+	@Before("execution(* com.capgemini.jst.SpringCapmates.repositories.HistoryDao.*(..))")
 	public void beforeAnyMethodInService() {
 	LOGGER.info ("testetestettetestttetetetetestttttttteeeeeeeeeeeest");
 	}

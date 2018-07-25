@@ -1,10 +1,10 @@
-package com.capgemini.jst.repositories;
+package com.capgemini.jst.SpringCapmates.repositories;
 
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.capgemini.jst.data.Game;
+import com.capgemini.jst.SpringCapmates.data.Game;
 
 @Repository
 public class GamesDao {

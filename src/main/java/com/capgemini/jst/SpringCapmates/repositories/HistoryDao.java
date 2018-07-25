@@ -1,4 +1,4 @@
-package com.capgemini.jst.repositories;
+package com.capgemini.jst.SpringCapmates.repositories;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.capgemini.jst.data.History;
-import com.capgemini.jst.data.Verdict;
+import com.capgemini.jst.SpringCapmates.data.History;
+import com.capgemini.jst.SpringCapmates.data.Verdict;
 
 @Repository
 public class HistoryDao {

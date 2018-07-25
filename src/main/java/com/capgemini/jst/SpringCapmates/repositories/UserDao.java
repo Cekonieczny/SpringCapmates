@@ -1,9 +1,9 @@
-package com.capgemini.jst.repositories;
+package com.capgemini.jst.SpringCapmates.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.capgemini.jst.data.User;
+import com.capgemini.jst.SpringCapmates.data.User;
 
 @Repository
 public class UserDao {

@@ -1,4 +1,4 @@
-package com.capgemini.jst.services;
+package com.capgemini.jst.SpringCapmates.services;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.capgemini.jst.data.History;
-import com.capgemini.jst.data.Verdict;
-import com.capgemini.jst.repositories.HistoryDao;
-import com.capgemini.jst.transferObjects.StatisticsDto;
+import com.capgemini.jst.SpringCapmates.data.History;
+import com.capgemini.jst.SpringCapmates.data.Verdict;
+import com.capgemini.jst.SpringCapmates.repositories.HistoryDao;
+import com.capgemini.jst.SpringCapmates.transferObjects.StatisticsDto;
 
 @Service
 public class UserStatisticsService {
@@ -87,7 +85,7 @@ public class UserStatisticsService {
 
 	public int getUserPositionInRanking(Long userId, Long gameId) {
 		List<Long> rankingList = getGameRanking(gameId).keySet().stream().collect(Collectors.toList());
-		return rankingList.indexOf(userId);
+		return rankingList.indexOf(userId)+1;
 	}
 	
 	public int getLevel(){

@@ -1,40 +1,29 @@
-package com.example.capgemini.jst.SpringCapmates;
+package com.capgemini.jst.SpringCapmates;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.capgemini.jst.data.History;
-import com.capgemini.jst.data.Verdict;
-import com.capgemini.jst.repositories.HistoryDao;
-import com.capgemini.jst.services.UserStatisticsService;
-import com.capgemini.jst.transferObjects.StatisticsDto;
+import com.capgemini.jst.SpringCapmates.repositories.HistoryDao;
+import com.capgemini.jst.SpringCapmates.services.UserStatisticsService;
+import com.capgemini.jst.SpringCapmates.transferObjects.StatisticsDto;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringCapmatesApplicationTests {
 
-	//@Autowired
-	//UserStatisticsService userStatisticsService;
+	@Autowired
+	UserStatisticsService userStatisticsService;
 	
-	//@Autowired
-	//HistoryDao historyDao;
+	@Autowired
+	HistoryDao historyDao;
 	
 	@Test
 	public void contextLoads() {
@@ -46,8 +35,8 @@ public class SpringCapmatesApplicationTests {
 	@Test
 	public void testRankingMap() {
 		//given
-		HistoryDao historyDao = new HistoryDao();
-		UserStatisticsService userStatisticsService = new UserStatisticsService(historyDao);
+		//HistoryDao historyDao = new HistoryDao();
+		//UserStatisticsService userStatisticsService = new UserStatisticsService(historyDao);
 		LinkedHashMap<Long,Integer> givenMap = new LinkedHashMap<Long, Integer>();
 		
 		givenMap.put( 3L, 100);
@@ -72,8 +61,8 @@ public class SpringCapmatesApplicationTests {
 	@Test
 	public void testUserRanking() {
 		//given
-		HistoryDao historyDao = new HistoryDao();
-		UserStatisticsService userStatisticsService = new UserStatisticsService(historyDao);
+		//HistoryDao historyDao = new HistoryDao();
+		//UserStatisticsService userStatisticsService = new UserStatisticsService(historyDao);
 
 		//when
 		int ranking = userStatisticsService.getUserPositionInRanking(3L, 1L);
@@ -85,8 +74,8 @@ public class SpringCapmatesApplicationTests {
 	@Test
 	public void testStats() {
 		//given
-		HistoryDao historyDao = new HistoryDao();
-		UserStatisticsService userStatisticsService = new UserStatisticsService(historyDao);
+		//HistoryDao historyDao = new HistoryDao();
+		//UserStatisticsService userStatisticsService = new UserStatisticsService(historyDao);
 		Integer averageScore = 52;
 	
 		//when

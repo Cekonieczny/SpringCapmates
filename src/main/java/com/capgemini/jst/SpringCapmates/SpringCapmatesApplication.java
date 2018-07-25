@@ -1,4 +1,4 @@
-package com.example.capgemini.jst.SpringCapmates;
+package com.capgemini.jst.SpringCapmates;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

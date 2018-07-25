@@ -1,19 +1,17 @@
-package com.capgemini.jst.services;
+package com.capgemini.jst.SpringCapmates.services;
 
-import java.util.LinkedHashMap;
+
 import java.util.List;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.jst.data.Game;
-import com.capgemini.jst.data.History;
-import com.capgemini.jst.exceptions.NoSuchGameInCollectionException;
-import com.capgemini.jst.transferObjects.UserGameCollectionDto;
-import com.capgemini.jst.transferObjects.UserMapper;
-import com.capgemini.jst.repositories.GamesDao;
-import com.capgemini.jst.repositories.UserDao;
+import com.capgemini.jst.SpringCapmates.data.Game;
+import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
+import com.capgemini.jst.SpringCapmates.transferObjects.UserMapper;
+import com.capgemini.jst.SpringCapmates.repositories.GamesDao;
+import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 
 @Service
 public class UserGameCollectionService {
@@ -43,19 +41,32 @@ public class UserGameCollectionService {
 				throw new Exception("There is no such game in general collection");
 			}
 		}
-
 		for (Game game : userGameCollection) {
 			if (gameId.equals(game.getGameId())) {
-				userGameCollection.add(newGameInUserCollection);
-			} else {
 				throw new Exception("This game already exists in user collection");
+		}
+		userGameCollection.add(newGameInUserCollection);
+		userGameCollectionDto.setGameCollection(userGameCollection);
+		userGameCollectionDto.setUserId(userId);
+		return userGameCollectionDto;
+	}
+	
+	public UserGameCollectionDto removeGameFromUserCollection(Long userId, Long gameId) throws Exception{
+		UserGameCollectionDto userGameCollectionDto = userMapper.mapUserToUserGameCollectionDto(userDao.find(userId));
+		List<Game> userGameCollection = userGameCollectionDto.getGameCollection();
+	
+		for (Game game : userGameCollection) {
+			if (gameId.equals(game.getGameId())) {
+				userGameCollection.remove(game);
+			} else {
+				throw new Exception("There is no such game in user collection");
 			}
 		}
 		userGameCollectionDto.setGameCollection(userGameCollection);
 		userGameCollectionDto.setUserId(userId);
 		return userGameCollectionDto;
 	}
-
+	
 	public void removeGameFromUserCollection(Long userId) {
 
 	}

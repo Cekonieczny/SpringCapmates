@@ -1,4 +1,4 @@
-package com.capgemini.jst.data;
+package com.capgemini.jst.SpringCapmates.data;
 
 import java.util.List;
 

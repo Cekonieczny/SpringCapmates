@@ -1,8 +1,8 @@
-package com.capgemini.jst.transferObjects;
+package com.capgemini.jst.SpringCapmates.transferObjects;
 
 import java.util.List;
 
-import com.capgemini.jst.data.Game;
+import com.capgemini.jst.SpringCapmates.data.Game;
 
 public class UserGameCollectionDto {
 	private Long userId;

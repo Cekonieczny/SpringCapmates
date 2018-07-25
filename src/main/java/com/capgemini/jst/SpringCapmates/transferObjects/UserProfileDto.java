@@ -1,4 +1,4 @@
-package com.capgemini.jst.transferObjects;
+package com.capgemini.jst.SpringCapmates.transferObjects;
 
 import org.springframework.stereotype.Service;
 

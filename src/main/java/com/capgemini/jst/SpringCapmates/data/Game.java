@@ -1,4 +1,4 @@
-package com.capgemini.jst.data;
+package com.capgemini.jst.SpringCapmates.data;
 
 public class Game {
 	private String gameName;

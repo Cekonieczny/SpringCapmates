@@ -7,13 +7,21 @@ public class User {
 	private String userFirstName;
 	private String userLastName;
 	private String password;
-	private int userHoursOfAvailability;
 	private Long userId;
 	private String eMailAddress;
 	private String lifeMotto;
 	private List<Game> gameCollection;
 
-	public User(int userLevel, String userName, String password, int userHoursOfAvailability, Long id) {
+	public User(int userLevel, String userFirstName, String userLastName, String password, Long userId, String eMailAddress, String lifeMotto,
+			List<Game> gameCollection) {
+		this.userLevel = userLevel;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
+		this.password = password;
+		this.userId = userId;
+		this.eMailAddress = eMailAddress;
+		this.lifeMotto = lifeMotto;
+		this.gameCollection = gameCollection;
 
 	}
 
@@ -39,14 +47,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public int getUserHoursOfAvailability() {
-		return userHoursOfAvailability;
-	}
-
-	public void setUserHoursOfAvailability(int userHoursOfAvailability) {
-		this.userHoursOfAvailability = userHoursOfAvailability;
 	}
 
 	public Long getId() {

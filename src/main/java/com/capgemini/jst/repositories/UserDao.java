@@ -1,4 +1,4 @@
-package com.example.capgemini.jst.repositories;
+package com.capgemini.jst.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,4 +22,5 @@ public class UserDao {
 		}
 		return null;
 	}
+
 }

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.jst.data.History;
 import com.capgemini.jst.data.Verdict;
+import com.capgemini.jst.repositories.HistoryDao;
 import com.capgemini.jst.transferObjects.StatisticsDto;
-import com.example.capgemini.jst.repositories.HistoryDao;
 
 @Service
 public class UserStatisticsService {
@@ -55,6 +55,10 @@ public class UserStatisticsService {
 		}
 		return statisticsDto;
 	}
+	
+	public List<History> getUserGameHistory(Long userId){
+		return historyDao.filterByUserId(userId);
+	}
 
 	public LinkedHashMap<Long, Integer> getGameRanking(Long gameId) {
 		List<History> historyByGameId = historyDao.filterByGameId(gameId);
@@ -85,4 +89,10 @@ public class UserStatisticsService {
 		List<Long> rankingList = getGameRanking(gameId).keySet().stream().collect(Collectors.toList());
 		return rankingList.indexOf(userId);
 	}
+	
+	public int getLevel(){
+		return 0;
+		//czy mozna korzystać z metody getuserstatistics
+	}
+	
 }

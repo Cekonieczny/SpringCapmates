@@ -1,8 +1,6 @@
 package com.capgemini.jst.data;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.capgemini.jst.transferObjects.StatisticsDto;
+import java.util.List;
 
 public class User {
 	private int userLevel;
@@ -12,6 +10,8 @@ public class User {
 	private int userHoursOfAvailability;
 	private Long userId;
 	private String eMailAddress;
+	private String lifeMotto;
+	private List<Game> gameCollection;
 
 	public User(int userLevel, String userName, String password, int userHoursOfAvailability, Long id) {
 
@@ -71,6 +71,22 @@ public class User {
 
 	public void setUserLastName(String userLastName) {
 		this.userLastName = userLastName;
+	}
+
+	public String getLifeMotto() {
+		return lifeMotto;
+	}
+
+	public void setLifeMotto(String lifeMotto) {
+		this.lifeMotto = lifeMotto;
+	}
+
+	public List<Game> getGameCollection() {
+		return gameCollection;
+	}
+
+	public void setGameCollection(List<Game> gameCollection) {
+		this.gameCollection = gameCollection;
 	}
 
 }

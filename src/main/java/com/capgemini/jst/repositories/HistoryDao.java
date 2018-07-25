@@ -1,8 +1,7 @@
-package com.example.capgemini.jst.repositories;
+package com.capgemini.jst.repositories;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;

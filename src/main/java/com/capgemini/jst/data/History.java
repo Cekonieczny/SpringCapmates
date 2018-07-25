@@ -1,7 +1,5 @@
 package com.capgemini.jst.data;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 public class History {
 	private Long gameId;
 	private Verdict verdict;

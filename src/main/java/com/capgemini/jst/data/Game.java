@@ -4,6 +4,11 @@ public class Game {
 	private String gameName;
 	private Long gameId;
 
+	public Game(Long gameId, String gameName) {
+		this.gameId = gameId;
+		this.gameName = gameName;
+	}
+
 	public String getGameName() {
 		return gameName;
 	}
@@ -16,7 +21,7 @@ public class Game {
 		return gameId;
 	}
 
-	public void setGameId(Long  gameId) {
+	public void setGameId(Long gameId) {
 		this.gameId = gameId;
 	}
 

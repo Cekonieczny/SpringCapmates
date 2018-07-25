@@ -22,9 +22,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.jst.data.History;
 import com.capgemini.jst.data.Verdict;
+import com.capgemini.jst.repositories.HistoryDao;
 import com.capgemini.jst.services.UserStatisticsService;
 import com.capgemini.jst.transferObjects.StatisticsDto;
-import com.example.capgemini.jst.repositories.HistoryDao;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

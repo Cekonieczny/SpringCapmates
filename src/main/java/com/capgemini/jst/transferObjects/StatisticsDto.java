@@ -1,25 +1,24 @@
 package com.capgemini.jst.transferObjects;
-
-import java.util.Date;
-
 import org.springframework.stereotype.Service;
+
 
 
 
 @Service
 public class StatisticsDto {
- 
-	private int averageResult;
+	private long userId;
+	private Integer averageScore;
 	private int gamesWon;
 	private int gamesLost;
 	private int gamesDrawn;
 	private int gamesPlayed;
 	
-	public int getAverageResult() {
-		return averageResult;
+	
+	public Integer getAverageScore() {
+		return averageScore;
 	}
-	public void setAverageResult(int averageResult) {
-		this.averageResult = averageResult;
+	public void setAverageScore(Integer averageScore) {
+		this.averageScore = averageScore;
 	}
 	public int getGamesWon() {
 		return gamesWon;
@@ -44,6 +43,12 @@ public class StatisticsDto {
 	}
 	public void setGamesPlayed(int gamesPlayed) {
 		this.gamesPlayed = gamesPlayed;
+	}
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 }

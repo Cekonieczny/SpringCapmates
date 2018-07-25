@@ -3,23 +3,23 @@ package com.capgemini.jst.data;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class History {
-	private AtomicLong gameId;
+	private Long gameId;
 	private Verdict verdict;
 	private Integer score;
-	private AtomicLong userId;
+	private Long userId;
 
-	public History(AtomicLong gameId, AtomicLong userId, Integer score, Verdict verdict) {
+	public History(Long gameId, Long userId, Integer score, Verdict verdict) {
 		this.gameId = gameId;
 		this.verdict = verdict;
 		this.score = score;
 		this.userId = userId;
 	}
 
-	public AtomicLong getGameId() {
+	public Long getGameId() {
 		return gameId;
 	}
 
-	public void setGameId(AtomicLong gameId) {
+	public void setGameId(Long gameId) {
 		this.gameId = gameId;
 	}
 
@@ -31,11 +31,11 @@ public class History {
 		this.score = score;
 	}
 
-	public AtomicLong getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(AtomicLong userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

@@ -7,14 +7,14 @@ import com.capgemini.jst.transferObjects.StatisticsDto;
 public class User {
 	private int userLevel;
 	private String userFirstName;
+	private String userLastName;
 	private String password;
 	private int userHoursOfAvailability;
-	private AtomicLong id;
+	private Long userId;
 	private String eMailAddress;
-	
 
-	public User(int userLevel,String userName,String password,int userHoursOfAvailability,AtomicLong id){
-		
+	public User(int userLevel, String userName, String password, int userHoursOfAvailability, Long id) {
+
 	}
 
 	public int getUserLevel() {
@@ -49,22 +49,12 @@ public class User {
 		this.userHoursOfAvailability = userHoursOfAvailability;
 	}
 
-	public AtomicLong getId() {
-		return id;
+	public Long getId() {
+		return userId;
 	}
 
-	public void setId(AtomicLong id) {
-		this.id = id;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		return (other instanceof User) && (id != null) ? id.equals(((User) other).id) : (other == this);
-	}
-
-	@Override
-	public int hashCode() {
-		return (id != null) ? (this.getClass().hashCode() + id.hashCode()) : super.hashCode();
+	public void setId(Long id) {
+		this.userId = id;
 	}
 
 	public String getEMailAddress() {
@@ -73,6 +63,14 @@ public class User {
 
 	public void setEMailAddress(String eMailAddress) {
 		this.eMailAddress = eMailAddress;
+	}
+
+	public String getUserLastName() {
+		return userLastName;
+	}
+
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
 	}
 
 }

@@ -1,8 +1,12 @@
 package com.capgemini.jst.services;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,39 +25,64 @@ public class UserStatisticsService {
 		this.historyDao = historyDao;
 	}
 
-	public StatisticsDto getUserStatistics(AtomicLong userId) {
+	public StatisticsDto getUserStatistics(Long userId) {
 		List<History> userGameHistory = historyDao.filterByUserId(userId);
-		Integer sumOfResults = null;
-		StatisticsDto statisticsDto = null;
+		Integer sumOfScores = 0;
 		int sumOfDefeats = 0;
 		int sumOfVictories = 0;
 		int sumOfDraws = 0;
 
-
-		while (userGameHistory.stream().iterator().hasNext()) {
-			sumOfResults = +userGameHistory.stream().iterator().next().getScore();
-			if (userGameHistory.stream().iterator().next().getVerdict() == Verdict.VICTORY) {
-				sumOfVictories = sumOfVictories++;
-			}
-			else if (userGameHistory.stream().iterator().next().getVerdict() == Verdict.DEFEAT) {
-				sumOfDefeats = sumOfDefeats++;
-			}
-			else if (userGameHistory.stream().iterator().next().getVerdict() == Verdict.DRAW) {
-				sumOfDraws = sumOfDraws++;
+		for (History history : userGameHistory) {
+			sumOfScores = sumOfScores + history.getScore();
+			if (history.getVerdict() == Verdict.VICTORY) {
+				sumOfVictories = sumOfVictories + 1;
+			} else if (history.getVerdict() == Verdict.DEFEAT) {
+				sumOfDefeats = sumOfDefeats + 1;
+			} else if (history.getVerdict() == Verdict.DRAW) {
+				sumOfDraws = sumOfDraws + 1;
 			}
 		}
+
+		StatisticsDto statisticsDto = new StatisticsDto();
 		statisticsDto.setGamesPlayed(userGameHistory.size());
 		statisticsDto.setGamesWon(sumOfVictories);
 		statisticsDto.setGamesDrawn(sumOfVictories);
 		statisticsDto.setGamesLost(sumOfVictories);
-		statisticsDto.setAverageResult(sumOfResults / userGameHistory.size());
+		if (userGameHistory.size() != 0) {
+			statisticsDto.setAverageScore(sumOfScores / userGameHistory.size());
+		} else {
+			statisticsDto.setAverageScore(0);
+		}
 		return statisticsDto;
-
 	}
 
-	public List<History> getGameRanking(AtomicLong gameId) {
-		return historyDao.filterByGameId(gameId).stream().sorted((o1, o2) -> o1.getScore().compareTo(o2.getScore()))
-				.collect(Collectors.toList());
+	public LinkedHashMap<Long, Integer> getGameRanking(Long gameId) {
+		List<History> historyByGameId = historyDao.filterByGameId(gameId);
 
+		Map<Long, Integer> userScoresMap = new HashMap<Long, Integer>();
+
+		for (History history : historyByGameId) {
+			if (userScoresMap.get(history.getUserId()) == null) {
+				userScoresMap.put(history.getUserId(), history.getScore());
+			} else {
+				Integer updatedScore = userScoresMap.get(history.getUserId()) + history.getScore();
+				userScoresMap.put(history.getUserId(), updatedScore);
+			}
+		}
+
+		Stream<Map.Entry<Long, Integer>> sortedMap = userScoresMap.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue());
+
+		LinkedHashMap<Long, Integer> rankingMap = sortedMap
+				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		// czy (e1, e2) -> e1 znaczy tyle co ten for powyzej?
+
+		return rankingMap;
+	}
+
+	public int getUserPositionInRanking(Long userId, Long gameId) {
+		List<Long> rankingList = getGameRanking(gameId).keySet().stream().collect(Collectors.toList());
+		return rankingList.indexOf(userId);
 	}
 }

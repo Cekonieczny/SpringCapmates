@@ -1,10 +1,8 @@
 package com.capgemini.jst.data;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 public class Game {
 	private String gameName;
-	private AtomicLong gameId;
+	private Long gameId;
 
 	public String getGameName() {
 		return gameName;
@@ -14,11 +12,11 @@ public class Game {
 		this.gameName = gameName;
 	}
 
-	public AtomicLong getGameId() {
+	public Long getGameId() {
 		return gameId;
 	}
 
-	public void setGameId(AtomicLong  gameId) {
+	public void setGameId(Long  gameId) {
 		this.gameId = gameId;
 	}
 

@@ -8,10 +8,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capgemini.jst.SpringCapmates.data.UserHoursOfAvailability;
+import com.capgemini.jst.SpringCapmates.mappers.UserHoursOfAvailabilityMapper;
 import com.capgemini.jst.SpringCapmates.repositories.UserHoursOfAvailabilityDao;
 import com.capgemini.jst.SpringCapmates.transferObjects.ChallengeDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserHoursOfAvailabilityDto;
-import com.capgemini.jst.SpringCapmates.transferObjects.UserHoursOfAvailabilityMapper;
 
 @Service
 public class UserHoursOfAvailabilityService {

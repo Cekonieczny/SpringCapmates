@@ -3,6 +3,8 @@ package com.capgemini.jst.SpringCapmates.transferObjects;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.stereotype.Service;
+
 public class UserHoursOfAvailabilityDto {
 	private LocalTime from;
 	private LocalTime to;

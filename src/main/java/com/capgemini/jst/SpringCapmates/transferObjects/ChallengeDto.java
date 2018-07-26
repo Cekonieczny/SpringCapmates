@@ -3,6 +3,8 @@ package com.capgemini.jst.SpringCapmates.transferObjects;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.stereotype.Service;
+
 public class ChallengeDto {
 	private Long challengedPlayerId;
 	private Long challengingPlayerId;

@@ -3,6 +3,8 @@ package com.capgemini.jst.SpringCapmates.repositories;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.jst.SpringCapmates.data.Game;
@@ -11,8 +13,9 @@ import com.capgemini.jst.SpringCapmates.data.User;
 @Repository
 public class UserDao {
 	List<User> listOfUsers;
-
-	private UserDao() {
+	
+	
+	public UserDao() {
 		listOfUsers = new ArrayList<>();
 		List<Game> gameCollection1 = new LinkedList<>();
 		gameCollection1.add(new Game(1L, "Agricola", 1, 4));

@@ -1,7 +1,8 @@
-package com.capgemini.jst.SpringCapmates.transferObjects;
+package com.capgemini.jst.SpringCapmates.mappers;
 
 import org.springframework.stereotype.Component;
 import com.capgemini.jst.SpringCapmates.data.UserHoursOfAvailability;
+import com.capgemini.jst.SpringCapmates.transferObjects.UserHoursOfAvailabilityDto;
 
 @Component
 public class UserHoursOfAvailabilityMapper {

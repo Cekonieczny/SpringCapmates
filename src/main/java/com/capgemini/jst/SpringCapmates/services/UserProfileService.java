@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserProfileDto;
 import com.capgemini.jst.SpringCapmates.data.User;
+import com.capgemini.jst.SpringCapmates.mappers.UserMapper;
 import com.capgemini.jst.SpringCapmates.repositories.UserDao;
-import com.capgemini.jst.SpringCapmates.transferObjects.UserMapper;
 
 @Service
 public class UserProfileService {

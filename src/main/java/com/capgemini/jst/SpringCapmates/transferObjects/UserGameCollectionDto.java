@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.jst.SpringCapmates.data.Game;
-@Service
+
 public class UserGameCollectionDto {
 	private Long userId;
 	private List<Game> gameCollection;

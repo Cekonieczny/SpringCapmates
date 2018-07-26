@@ -10,7 +10,7 @@ import com.capgemini.jst.SpringCapmates.data.Game;
 public class GamesDao {
 	private List<Game> listOfGames;
 
-	@Autowired
+	
 	private GamesDao() {
 		listOfGames = new LinkedList<>();
 		listOfGames.add(new Game(1L, "Agricola", 1, 4));

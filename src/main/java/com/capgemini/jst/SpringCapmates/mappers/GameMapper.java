@@ -1,6 +1,7 @@
-package com.capgemini.jst.SpringCapmates.transferObjects;
+package com.capgemini.jst.SpringCapmates.mappers;
 import org.springframework.stereotype.Component;
 import com.capgemini.jst.SpringCapmates.data.Game;
+import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
 
 @Component
 public class GameMapper {

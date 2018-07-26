@@ -3,8 +3,6 @@ package com.capgemini.jst.SpringCapmates.repositories;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.capgemini.jst.SpringCapmates.data.History;
 import com.capgemini.jst.SpringCapmates.data.Verdict;
@@ -13,7 +11,7 @@ import com.capgemini.jst.SpringCapmates.data.Verdict;
 public class HistoryDao {
 	List<History> listOfHistory;
 	
-	@Autowired
+	
 	public HistoryDao() {
 		listOfHistory = new LinkedList<>();
 		listOfHistory.add(new History(1L, 1L, 25, Verdict.VICTORY));

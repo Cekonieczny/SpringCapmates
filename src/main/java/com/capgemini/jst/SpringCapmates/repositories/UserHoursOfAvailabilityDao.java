@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.capgemini.jst.SpringCapmates.data.UserHoursOfAvailability;
 
@@ -14,7 +13,7 @@ import com.capgemini.jst.SpringCapmates.data.UserHoursOfAvailability;
 public class UserHoursOfAvailabilityDao {
 	List<UserHoursOfAvailability > listOfHoursOfAvailability;
 	
-	@Autowired
+
 	public UserHoursOfAvailabilityDao() {
 		listOfHoursOfAvailability = new LinkedList<>();
 		LocalTime from1 = LocalTime.of(11, 30);

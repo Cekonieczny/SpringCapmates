@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capgemini.jst.SpringCapmates.data.Game;
+import com.capgemini.jst.SpringCapmates.mappers.GameMapper;
+import com.capgemini.jst.SpringCapmates.mappers.UserMapper;
 import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
-import com.capgemini.jst.SpringCapmates.transferObjects.GameMapper;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
-import com.capgemini.jst.SpringCapmates.transferObjects.UserMapper;
 import com.capgemini.jst.SpringCapmates.repositories.GamesDao;
 import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 

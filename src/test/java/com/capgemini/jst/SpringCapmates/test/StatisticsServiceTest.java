@@ -1,4 +1,4 @@
-package com.capgemini.jst.SpringCapmates;
+package com.capgemini.jst.SpringCapmates.test;
 
 import static org.junit.Assert.assertEquals;
 

@@ -12,7 +12,9 @@ public class UserHoursOfAvailabilityMapper {
 		
 		UserHoursOfAvailabilityDto userHoursOfAvailabilityDto = new UserHoursOfAvailabilityDto(
 				userHoursOfAvailability.getFrom(), userHoursOfAvailability.getTo(), userHoursOfAvailability.getDate(),
-				userHoursOfAvailability.getComment());
+				userHoursOfAvailability.getUserId());
+		
+		userHoursOfAvailabilityDto.setComment(userHoursOfAvailability.getComment());
 
 		return userHoursOfAvailabilityDto;
 	}
@@ -25,6 +27,7 @@ public class UserHoursOfAvailabilityMapper {
 		newUserHoursOfAvailability.setDate(userHoursOfAvailabilityDto.getDate());
 		newUserHoursOfAvailability.setFrom(userHoursOfAvailabilityDto.getFrom());
 		newUserHoursOfAvailability.setTo(userHoursOfAvailabilityDto.getTo());
+		newUserHoursOfAvailability.setUserId(userHoursOfAvailabilityDto.getUserId());
 		return newUserHoursOfAvailability;
 	}
 }

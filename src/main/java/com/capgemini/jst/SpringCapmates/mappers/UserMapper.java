@@ -21,14 +21,14 @@ public class UserMapper {
 	}
 
 	public UserProfileDto mapUserToUserProfileDto(User user) {
-		UserProfileDto userProfileDto = new UserProfileDto(user.getUserName(), user.getUserLastName(),
-				user.getPassword(), user.getEMailAddress(), user.getLifeMotto());
+		UserProfileDto userProfileDto = new UserProfileDto(user.getUserFirstName(), user.getUserLastName(),user.getEMailAddress(),
+				user.getPassword(), user.getLifeMotto());
 		return userProfileDto;
 	}
 	
 	public User mapUserProfileDtoToUser(UserProfileDto userProfileDto,User user) {
 		User newUser = user;
-		newUser.setUserName(userProfileDto.getUserFirstName());
+		newUser.setUserFirstName(userProfileDto.getUserFirstName());
 		return user;
 	}
 

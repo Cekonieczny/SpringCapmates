@@ -26,12 +26,12 @@ public class User {
 		
 	}
 
-	public String getUserName() {
+	public String getUserFirstName() {
 		return userFirstName;
 	}
 
-	public void setUserName(String userName) {
-		this.userFirstName = userName;
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
 	}
 
 	public String getPassword() {

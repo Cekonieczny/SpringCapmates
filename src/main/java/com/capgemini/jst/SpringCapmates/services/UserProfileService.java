@@ -25,7 +25,8 @@ public class UserProfileService {
 
 	public User changeUserFirstName(Long userId, String newUserFirstName) {
 		User user = userDao.find(userId);
-		user.setUserName(newUserFirstName);
+		user.setUserFirstName(newUserFirstName);
+		userDao.update(user);
 		return user;
 
 	}
@@ -33,6 +34,7 @@ public class UserProfileService {
 	public User changeUserLastName(Long userId, String newUserLastName) {
 		User user = userDao.find(userId);
 		user.setUserLastName(newUserLastName);
+		userDao.update(user);
 		return user;
 
 	}
@@ -40,6 +42,7 @@ public class UserProfileService {
 	public User changeUserPassword(Long userId, String newPassword) {
 		User user = userDao.find(userId);
 		user.setPassword(newPassword);
+		userDao.update(user);
 		return user;
 
 	}
@@ -47,6 +50,7 @@ public class UserProfileService {
 	public User changeUserEmail(Long userId, String newEmailAddress) {
 		User user = userDao.find(userId);
 		user.setEMailAddress(newEmailAddress);
+		userDao.update(user);
 		return user;
 
 	}
@@ -54,6 +58,7 @@ public class UserProfileService {
 	public User changeUserLifeMotto(Long userId, String newLifeMotto) {
 		User user = userDao.find(userId);
 		user.setLifeMotto(newLifeMotto);
+		userDao.update(user);
 		return user;
 
 	}

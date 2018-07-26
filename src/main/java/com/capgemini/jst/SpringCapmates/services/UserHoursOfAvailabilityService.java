@@ -1,7 +1,9 @@
 package com.capgemini.jst.SpringCapmates.services;
 
+import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,16 +65,26 @@ public class UserHoursOfAvailabilityService {
 			UserHoursOfAvailability userHoursOfAvailability2) {
 
 		long commonPeriodOfTime = 0;
+		
+		/*long from1 = Time.valueOf(userHoursOfAvailability1.getFrom()).getTime();
+		long to1 = Time.valueOf(userHoursOfAvailability1.getTo()).getTime();
+		long from2 = Time.valueOf(userHoursOfAvailability2.getFrom()).getTime();
+		long to2 = Time.valueOf(userHoursOfAvailability2.getTo()).getTime();
+		
+		if(from1>=from2&&to1>=to2){
+			
+		}
+		else if(from1)*/
 
 		if (userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getFrom())
 				|| userHoursOfAvailability2.getTo().isBefore(userHoursOfAvailability1.getFrom())) {
 			return false;
 
-		} else if (userHoursOfAvailability1.getFrom() == userHoursOfAvailability2.getTo()
-				|| userHoursOfAvailability2.getFrom() == userHoursOfAvailability1.getTo()) {
+		} else if (userHoursOfAvailability1.getFrom().equals(userHoursOfAvailability2.getTo()) 
+				|| userHoursOfAvailability2.getFrom().equals(userHoursOfAvailability1.getTo()) ) {
 			return false;
 
-		} else if (userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getTo())
+		} else if ((userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getTo()))
 				&& userHoursOfAvailability1.getTo().isAfter(userHoursOfAvailability2.getFrom())) {
 
 			commonPeriodOfTime = Duration.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability1.getTo())
@@ -84,11 +96,27 @@ public class UserHoursOfAvailabilityService {
 			commonPeriodOfTime = Duration.between(userHoursOfAvailability1.getFrom(), userHoursOfAvailability2.getTo())
 					.toMinutes();
 
-		} else if (userHoursOfAvailability1.getFrom() == userHoursOfAvailability2.getFrom()) {
+		}else if ((userHoursOfAvailability1.getTo().equals(userHoursOfAvailability2.getTo()))
+				&& userHoursOfAvailability1.getTo().isAfter(userHoursOfAvailability2.getFrom())) {
+
+			commonPeriodOfTime = Duration.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability1.getTo())
+					.toMinutes();
+
+		} else if (userHoursOfAvailability2.getTo().equals(userHoursOfAvailability1.getTo())
+				&& userHoursOfAvailability2.getTo().isAfter(userHoursOfAvailability1.getFrom())) {
+
+			commonPeriodOfTime = Duration.between(userHoursOfAvailability1.getFrom(), userHoursOfAvailability2.getTo())
+					.toMinutes();
+
+		}else if (userHoursOfAvailability1.getFrom().equals(userHoursOfAvailability2.getFrom())) {
 			if (userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getTo())) {
 				commonPeriodOfTime = Duration
 						.between(userHoursOfAvailability1.getFrom(), userHoursOfAvailability1.getTo()).toMinutes();
 			} else if (userHoursOfAvailability2.getTo().isBefore(userHoursOfAvailability1.getTo())) {
+				commonPeriodOfTime = Duration
+						.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability2.getTo()).toMinutes();
+			}
+			else if (userHoursOfAvailability2.getTo().equals(userHoursOfAvailability1.getTo())){
 				commonPeriodOfTime = Duration
 						.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability2.getTo()).toMinutes();
 			}
@@ -111,7 +139,7 @@ public class UserHoursOfAvailabilityService {
 			LocalDate specificUserDate = specificUserhours.getDate();
 			UserHoursOfAvailability specificUserHoursOfAvailability = specificUserhours;
 			for (UserHoursOfAvailability allHours : userHoursOfAvailabilityDao.findAll()) {
-				if (specificUserDate == allHours.getDate()) {
+				if (allHours.getUserId() != userId && specificUserDate.isEqual(allHours.getDate())) {
 					if (areHoursMatching(durationOfGameInMinutes, specificUserHoursOfAvailability, allHours)) {
 						listOfMatchingUsersId.add(allHours.getUserId());
 					}

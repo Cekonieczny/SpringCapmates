@@ -1,12 +1,8 @@
 package com.capgemini.jst.SpringCapmates.repositories;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.capgemini.jst.SpringCapmates.data.Game;
 import com.capgemini.jst.SpringCapmates.data.User;
 
@@ -16,7 +12,7 @@ public class UserDao {
 	
 	
 	public UserDao() {
-		listOfUsers = new ArrayList<>();
+		listOfUsers = new LinkedList<>();
 		List<Game> gameCollection1 = new LinkedList<>();
 		gameCollection1.add(new Game(1L, "Agricola", 1, 4));
 		gameCollection1.add(new Game(2L, "Civilization", 2, 4));
@@ -53,21 +49,21 @@ public class UserDao {
 		gameCollection1.add(new Game(4L, "Gaia Project", 2, 4));
 		listOfUsers.add(new User(1L, "Jan", "Kowalski", "haslo123", "jan.kowalski@abc.com", "motto1", gameCollection1));
 		listOfUsers
-				.add(new User(2L, "Jan", "Nowak", "hfdfd123", "jan.kowalsyyyki@abc.com", "motto41", gameCollection2));
-		listOfUsers.add(new User(3L, "Andrzej", "Wisniewski", "hlo123", "jan.kowerhyalski@abc.com", "motto451",
+				.add(new User(2L, "Jan", "Nowak", "hfdfd123", "jan.nowak@abc.com", "motto41", gameCollection2));
+		listOfUsers.add(new User(3L, "Andrzej", "Wisniewski", "hlo123", "andrzej.wisniewski@abc.com", "motto451",
 				gameCollection3));
 		listOfUsers.add(
-				new User(4L, "Janusz", "Gruszecki", "haso123", "jan.kowyteralski@abc.com", "mott6o1", gameCollection4));
-		listOfUsers.add(new User(5L, "Wojciech", "Truskawski", "hasl13", "jan.kowawewqralski@abc.com", "motto71",
+				new User(4L, "Janusz", "Gruszecki", "haso123", "gruszecki23.janusz@abc.com", "mott6o1", gameCollection4));
+		listOfUsers.add(new User(5L, "Wojciech", "Truskawski", "hasl13", "truskawski.wojciech@abc.com", "motto71",
 				gameCollection5));
 		listOfUsers.add(
-				new User(6L, "Tomasz", "Malinowski", "haslo3", "jan.kowalnnnski@abc.com", "mot8to1", gameCollection6));
+				new User(6L, "Tomasz", "Malinowski", "haslo3", "tomasz.malinowski@abc.com", "mot8to1", gameCollection6));
 		listOfUsers.add(
-				new User(7L, "Piotr", "Poziomski", "ho123", "jan.kowdfgalski@abc.com", "mott9o1", gameCollection7));
+				new User(7L, "Piotr", "Poziomski", "ho123", "poziomski.piotr@abc.com", "mott9o1", gameCollection7));
 		listOfUsers
-				.add(new User(8L, "Pawel", "Porzecki", "has23", "jan.kowfdfalski@abc.com", "motto10", gameCollection8));
+				.add(new User(8L, "Pawel", "Porzecki", "has23", "porzecki.pawel@abc.com", "motto10", gameCollection8));
 		listOfUsers.add(
-				new User(9L, "Michał", "Sliwinski", "has234", "jan.kowadsalski@abc.com", "motto51", gameCollection9));
+				new User(9L, "Michał", "Sliwinski", "has234", "michal.sliwinski@abc.com", "motto51", gameCollection9));
 	}
 
 	public User find(Long userId) {
@@ -101,12 +97,16 @@ public class UserDao {
 	}
 
 	public void update(User user) {
+		User userToUpdate = new User();
 		for (User tempUser : listOfUsers) {
 			if (tempUser.getUserId().equals(user.getUserId())) {
-				listOfUsers.remove(tempUser);
+				userToUpdate = tempUser;
 			}
+			listOfUsers.remove(userToUpdate);
 			listOfUsers.add(user);
+			return;
 		}
+		
 	}
 
 }

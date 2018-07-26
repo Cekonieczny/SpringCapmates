@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class TestAspect {
+public class HistoryDaoAspect {
 	private LocalTime before;
 	private LocalTime after;
 	private int difference;
-	private static final Logger LOGGER= LoggerFactory.getLogger(TestAspect.class);
+	private static final Logger LOGGER= LoggerFactory.getLogger(HistoryDaoAspect.class);
 	
 	@Before("execution(* com.capgemini.jst.SpringCapmates.repositories.HistoryDao.*(..))")
-	public void beforeAnyMethodInService() { before = LocalTime.now();
+	public void beforeAnyMethodInDao() { before = LocalTime.now();
 	LOGGER.info ("logging time before method was executed");
 	}
 	
 	@After("execution(* com.capgemini.jst.SpringCapmates.repositories.HistoryDao.*(..))")
-	public void afterAnyMethodInService() { after = LocalTime.now();
+	public void afterAnyMethodInDao() { after = LocalTime.now();
 	difference = (after.getNano()-before.getNano())/1000000;
 	LOGGER.info ("execution time of the method: "+difference+ " miliseconds");
 	}

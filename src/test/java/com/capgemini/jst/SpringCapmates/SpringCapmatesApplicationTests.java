@@ -2,9 +2,6 @@ package com.capgemini.jst.SpringCapmates;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +29,7 @@ public class SpringCapmatesApplicationTests {
 	
 	
 	
-	@Test
+	/*@Test
 	public void testRankingMap() {
 		//given
 		//HistoryDao historyDao = new HistoryDao();
@@ -56,7 +53,7 @@ public class SpringCapmatesApplicationTests {
 		//then
 		System.out.println(receivedList);
 		assertEquals(givenMap,receivedMap);
-	}
+	}*/
 	
 	@Test
 	public void testUserRanking() {

@@ -3,34 +3,27 @@ package com.capgemini.jst.SpringCapmates.data;
 import java.util.List;
 
 public class User {
-	private int userLevel;
+	private Long userId;
 	private String userFirstName;
 	private String userLastName;
-	private String password;
-	private Long userId;
 	private String eMailAddress;
+	private String password;
 	private String lifeMotto;
 	private List<Game> gameCollection;
-
-	public User(int userLevel, String userFirstName, String userLastName, String password, Long userId, String eMailAddress, String lifeMotto,
-			List<Game> gameCollection) {
-		this.userLevel = userLevel;
+	
+	public User(Long userId, String userFirstName, String userLastName, String password, String eMailAddress,
+			String lifeMotto, List<Game> gameCollection) {
+		this.userId = userId;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
-		this.password = password;
-		this.userId = userId;
 		this.eMailAddress = eMailAddress;
+		this.password = password;
 		this.lifeMotto = lifeMotto;
 		this.gameCollection = gameCollection;
-
 	}
-
-	public int getUserLevel() {
-		return userLevel;
-	}
-
-	public void setUserLevel(int userLevel) {
-		this.userLevel = userLevel;
+	
+	public User(){
+		
 	}
 
 	public String getUserName() {
@@ -49,11 +42,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Long getId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setId(Long id) {
+	public void setUserId(Long id) {
 		this.userId = id;
 	}
 

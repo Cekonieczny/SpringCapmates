@@ -51,6 +51,7 @@ public class UserStatisticsService {
 		} else {
 			statisticsDto.setAverageScore(0);
 		}
+		statisticsDto.setLevel(sumOfScores/30);
 		return statisticsDto;
 	}
 	
@@ -58,7 +59,12 @@ public class UserStatisticsService {
 		return historyDao.filterByUserId(userId);
 	}
 
-	public LinkedHashMap<Long, Integer> getGameRanking(Long gameId) {
+	public int getUserPositionInRanking(Long userId, Long gameId) {
+		List<Long> rankingList = getGameRanking(gameId).keySet().stream().collect(Collectors.toList());
+		return rankingList.indexOf(userId)+1;
+	}
+
+	private LinkedHashMap<Long, Integer> getGameRanking(Long gameId) {
 		List<History> historyByGameId = historyDao.filterByGameId(gameId);
 
 		Map<Long, Integer> userScoresMap = new HashMap<Long, Integer>();
@@ -78,19 +84,8 @@ public class UserStatisticsService {
 		LinkedHashMap<Long, Integer> rankingMap = sortedMap
 				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-		// czy (e1, e2) -> e1 znaczy tyle co ten for powyzej?
 
 		return rankingMap;
-	}
-
-	public int getUserPositionInRanking(Long userId, Long gameId) {
-		List<Long> rankingList = getGameRanking(gameId).keySet().stream().collect(Collectors.toList());
-		return rankingList.indexOf(userId)+1;
-	}
-	
-	public int getLevel(){
-		return 0;
-		//czy mozna korzystać z metody getuserstatistics
 	}
 	
 }

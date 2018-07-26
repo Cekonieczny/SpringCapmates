@@ -13,28 +13,24 @@ public class GamesDao {
 	@Autowired
 	private GamesDao() {
 		listOfGames = new LinkedList<>();
-		listOfGames.add(new Game(1L, "Agricola"));
-		listOfGames.add(new Game(2L, "Civilization"));
-		listOfGames.add(new Game(3L, "Gloomhaven"));
-		listOfGames.add(new Game(4L, "Gaia Project"));
-		listOfGames.add(new Game(5L, "Scythe"));
-		listOfGames.add(new Game(6L, "Puerto Rico"));
+		listOfGames.add(new Game(1L, "Agricola", 1, 4));
+		listOfGames.add(new Game(2L, "Civilization", 2, 4));
+		listOfGames.add(new Game(3L, "Gloomhaven", 2, 4));
+		listOfGames.add(new Game(4L, "Gaia Project", 2, 4));
+		listOfGames.add(new Game(5L, "Scythe", 2, 4));
+		listOfGames.add(new Game(6L, "Puerto Rico", 2, 4));
 	}
 
 	public List<Game> findAll() {
 		return listOfGames;
 	}
 
-	public void addNewGame(String gameName) {
-		this.listOfGames.add(new Game(System.currentTimeMillis(), gameName));
-	}
-
-	public void deleteGame(Long gameId){
-		for(Game game:listOfGames){
-			if(game.getGameId().equals(gameId)){
-				listOfGames.remove(game);
-			}
+	public void create(Game game) {
+		if (game.getGameId() != null) {
+			throw new IllegalArgumentException("Game is already created, the game ID is not null.");
+		} else {
+			game.setGameId(System.currentTimeMillis());
+			this.listOfGames.add(game);
 		}
 	}
-
 }

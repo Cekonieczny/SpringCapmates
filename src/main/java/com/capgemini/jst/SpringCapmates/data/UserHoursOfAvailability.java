@@ -4,21 +4,25 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class UserHoursOfAvailability {
+	private Long userHoursOfAvailabilityId;
 	private LocalTime from;
 	private LocalTime to;
 	private LocalDate date;
 	private Long userId;
 	private String comment;
-	private boolean status;
+	private boolean active = true;
 
-	public UserHoursOfAvailability(LocalTime from, LocalTime to, LocalDate date, Long userId, String comment,
-			boolean status) {
+	public UserHoursOfAvailability(Long userHoursOfAvailabilityId, LocalTime from, LocalTime to, LocalDate date,
+			Long userId) {
 		this.from = from;
 		this.to = to;
 		this.date = date;
 		this.userId = userId;
-		this.comment = comment;
-		this.status = status;
+		this.setUserHoursOfAvailabilityId(userHoursOfAvailabilityId);
+	}
+
+	public UserHoursOfAvailability() {
+
 	}
 
 	public LocalTime getFrom() {
@@ -61,12 +65,20 @@ public class UserHoursOfAvailability {
 		this.comment = comment;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public Long getUserHoursOfAvailabilityId() {
+		return userHoursOfAvailabilityId;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setUserHoursOfAvailabilityId(Long userHoursOfAvailabilityId) {
+		this.userHoursOfAvailabilityId = userHoursOfAvailabilityId;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

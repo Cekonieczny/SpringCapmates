@@ -12,6 +12,7 @@ public class StatisticsDto {
 	private int gamesLost;
 	private int gamesDrawn;
 	private int gamesPlayed;
+	private int level;
 	
 	
 	public Integer getAverageScore() {
@@ -49,6 +50,12 @@ public class StatisticsDto {
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }

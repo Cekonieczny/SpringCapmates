@@ -25,7 +25,7 @@ public class HistoryDao {
 		listOfHistory.add(new History(1L, 6L, 10, Verdict.VICTORY));
 		listOfHistory.add(new History(1L, 5L, 5, Verdict.VICTORY));
 	}
-
+	
 	public List<History> filterByUserId(Long userId) {
 		return  listOfHistory.stream().filter(p -> p.getUserId().equals(userId))
 				.collect(Collectors.toList());
@@ -34,15 +34,6 @@ public class HistoryDao {
 	public List<History> filterByGameId(Long gameId) {
 		return  listOfHistory.stream().filter(p -> p.getGameId().equals(gameId))
 				.collect(Collectors.toList());
-	}
-	
-
-	public void create(History history) {
-		listOfHistory.add(history);
-	}
-
-	public void delete(History history) {
-		listOfHistory.remove(history);
 	}
 
 }

@@ -15,55 +15,61 @@ public class UserDao {
 	private UserDao() {
 		listOfUsers = new ArrayList<>();
 		List<Game> gameCollection1 = new LinkedList<>();
-		gameCollection1.add(new Game(1L, "Agricola"));
-		gameCollection1.add(new Game(2L, "Civilization"));
-		gameCollection1.add(new Game(3L, "Gloomhaven"));
-		gameCollection1.add(new Game(4L, "Gaia Project"));
-		gameCollection1.add(new Game(5L, "Scythe"));
-		gameCollection1.add(new Game(6L, "Puerto Rico"));
+		gameCollection1.add(new Game(1L, "Agricola", 1, 4));
+		gameCollection1.add(new Game(2L, "Civilization", 2, 4));
+		gameCollection1.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection1.add(new Game(4L, "Gaia Project", 2, 5));
+		gameCollection1.add(new Game(5L, "Scythe", 2, 4));
+		gameCollection1.add(new Game(6L, "Puerto Rico", 2, 4));
 		List<Game> gameCollection2 = new LinkedList<>();
-		gameCollection2.add(new Game(1L, "Agricola"));
-		gameCollection2.add(new Game(5L, "Scythe"));
-		gameCollection2.add(new Game(4L, "Gaia Project"));
+		gameCollection2.add(new Game(1L, "Agricola", 1, 4));
+		gameCollection2.add(new Game(5L, "Scythe", 2, 4));
+		gameCollection2.add(new Game(4L, "Gaia Project", 2, 5));
 		List<Game> gameCollection3 = new LinkedList<>();
-		gameCollection3.add(new Game(3L, "Gloomhaven"));
-		gameCollection3.add(new Game(2L, "Civilization"));
-		gameCollection3.add(new Game(4L, "Gaia Project"));
-		gameCollection3.add(new Game(5L, "Scythe"));
+		gameCollection3.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection3.add(new Game(2L, "Civilization", 2, 4));
+		gameCollection3.add(new Game(4L, "Gaia Project", 2, 5));
+		gameCollection3.add(new Game(5L, "Scythe", 2, 4));
 		List<Game> gameCollection4 = new LinkedList<>();
-		gameCollection4.add(new Game(3L, "Gloomhaven"));
-		gameCollection4.add(new Game(2L, "Civilization"));
+		gameCollection4.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection4.add(new Game(2L, "Civilization", 2, 4));
 		List<Game> gameCollection5 = new LinkedList<>();
-		gameCollection5.add(new Game(2L, "Civilization"));
+		gameCollection5.add(new Game(2L, "Civilization", 2, 4));
 		List<Game> gameCollection6 = new LinkedList<>();
-		gameCollection6.add(new Game(1L, "Agricola"));
-		gameCollection6.add(new Game(2L, "Civilization"));
-		gameCollection6.add(new Game(4L, "Gaia Project"));
+		gameCollection6.add(new Game(1L, "Agricola", 1, 4));
+		gameCollection6.add(new Game(2L, "Civilization", 2, 4));
+		gameCollection6.add(new Game(4L, "Gaia Project", 2, 5));
 		List<Game> gameCollection7 = new LinkedList<>();
 		List<Game> gameCollection8 = new LinkedList<>();
-		gameCollection1.add(new Game(5L, "Scythe"));
-		gameCollection1.add(new Game(3L, "Gloomhaven"));
-		gameCollection1.add(new Game(4L, "Gaia Project"));
+		gameCollection1.add(new Game(5L, "Scythe", 2, 4));
+		gameCollection1.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection1.add(new Game(4L, "Gaia Project", 2, 4));
+		List<Game> gameCollection9 = new LinkedList<>();
+		gameCollection1.add(new Game(5L, "Scythe", 2, 4));
+		gameCollection1.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection1.add(new Game(4L, "Gaia Project", 2, 4));
+		listOfUsers.add(new User(1L, "Jan", "Kowalski", "haslo123", "jan.kowalski@abc.com", "motto1", gameCollection1));
 		listOfUsers
-				.add(new User(4, "Jan", "Kowalski", "haslo123", 1L, "jan.kowalski@abc.com", "motto1", gameCollection1));
-		listOfUsers.add(new User(20, "Jan", "Nowak", "h123", 2L, "jan.kowalski@abc.com", "motto1", gameCollection2));
+				.add(new User(2L, "Jan", "Nowak", "hfdfd123", "jan.kowalsyyyki@abc.com", "motto41", gameCollection2));
+		listOfUsers.add(new User(3L, "Andrzej", "Wisniewski", "hlo123", "jan.kowerhyalski@abc.com", "motto451",
+				gameCollection3));
 		listOfUsers.add(
-				new User(12, "Andrzej", "Wiśniewski", "hlo123", 3L, "jan.kowalski@abc.com", "motto1", gameCollection3));
-		listOfUsers.add(
-				new User(34, "Janusz", "Gruszecki", "haso123", 4L, "jan.kowalski@abc.com", "motto1", gameCollection4));
-		listOfUsers.add(new User(55, "Wojciech", "Truskawski", "hasl13", 5L, "jan.kowalski@abc.com", "motto1",
+				new User(4L, "Janusz", "Gruszecki", "haso123", "jan.kowyteralski@abc.com", "mott6o1", gameCollection4));
+		listOfUsers.add(new User(5L, "Wojciech", "Truskawski", "hasl13", "jan.kowawewqralski@abc.com", "motto71",
 				gameCollection5));
 		listOfUsers.add(
-				new User(66, "Tomasz", "Malinowski", "haslo3", 6L, "jan.kowalski@abc.com", "motto1", gameCollection6));
+				new User(6L, "Tomasz", "Malinowski", "haslo3", "jan.kowalnnnski@abc.com", "mot8to1", gameCollection6));
 		listOfUsers.add(
-				new User(123, "Piotr", "Poziomski", "ho123", 7L, "jan.kowalski@abc.com", "motto1", gameCollection7));
+				new User(7L, "Piotr", "Poziomski", "ho123", "jan.kowdfgalski@abc.com", "mott9o1", gameCollection7));
 		listOfUsers
-				.add(new User(66, "Paweł", "Porzecki", "has23", 8L, "jan.kowalski@abc.com", "motto1", gameCollection8));
+				.add(new User(8L, "Pawel", "Porzecki", "has23", "jan.kowfdfalski@abc.com", "motto10", gameCollection8));
+		listOfUsers.add(
+				new User(9L, "Michał", "Sliwinski", "has234", "jan.kowadsalski@abc.com", "motto51", gameCollection9));
 	}
 
 	public User find(Long userId) {
 		for (User user : listOfUsers) {
-			if (user.getId().equals(userId)) {
+			if (user.getUserId().equals(userId)) {
 				return user;
 			}
 		}
@@ -75,16 +81,29 @@ public class UserDao {
 	}
 
 	public void create(User user) {
-		listOfUsers.add(user);
+		if (user.getUserId() != null) {
+			throw new IllegalArgumentException("User is already created, User is not null.");
+		} else {
+			user.setUserId(System.currentTimeMillis());
+			listOfUsers.add(user);
+		}
 	}
 
-	public void remove(User user) {
-		listOfUsers.remove(user.getId());
+	public void delete(User user) {
+		if (user.getUserId() == null) {
+			throw new IllegalArgumentException("User is not present in database");
+		} else {
+			listOfUsers.remove(user.getUserId());
+		}
 	}
 
 	public void update(User user) {
-		listOfUsers.remove(find(user.getId()));
-		listOfUsers.add(user);
+		for (User tempUser : listOfUsers) {
+			if (tempUser.getUserId().equals(user.getUserId())) {
+				listOfUsers.remove(tempUser);
+			}
+			listOfUsers.add(user);
+		}
 	}
 
 }

@@ -2,7 +2,7 @@ package com.capgemini.jst.SpringCapmates.transferObjects;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+
 
 import com.capgemini.jst.SpringCapmates.data.Game;
 

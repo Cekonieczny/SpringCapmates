@@ -1,6 +1,6 @@
 package com.capgemini.jst.SpringCapmates.transferObjects;
 
-import org.springframework.stereotype.Service;
+
 
 
 public class UserProfileDto {

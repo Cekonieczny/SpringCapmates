@@ -1,9 +1,7 @@
 package com.capgemini.jst.SpringCapmates.services;
 
-import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 

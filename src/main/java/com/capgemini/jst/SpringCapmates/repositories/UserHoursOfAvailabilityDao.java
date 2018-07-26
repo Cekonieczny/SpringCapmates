@@ -88,14 +88,15 @@ public class UserHoursOfAvailabilityDao {
 	}
 
 	public void delete(UserHoursOfAvailability userHoursOfAvailability) {
-		
+		UserHoursOfAvailability userHoursToRemove = new UserHoursOfAvailability();
 		for (UserHoursOfAvailability tempHours : listOfHoursOfAvailability) {
 			if (tempHours.getUserHoursOfAvailabilityId().equals(userHoursOfAvailability.getUserHoursOfAvailabilityId())) {
-				listOfHoursOfAvailability.remove(tempHours);
-			}
-			userHoursOfAvailability.setActive(false);
-			listOfHoursOfAvailability.add(userHoursOfAvailability);
+				userHoursToRemove = tempHours;
+			}	
 		}
+		listOfHoursOfAvailability.remove(userHoursToRemove);
+		userHoursOfAvailability.setActive(false);
+		listOfHoursOfAvailability.add(userHoursOfAvailability);
 	}
 
 }

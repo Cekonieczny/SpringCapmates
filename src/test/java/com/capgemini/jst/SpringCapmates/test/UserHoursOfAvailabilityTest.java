@@ -12,12 +12,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.capgemini.jst.SpringCapmates.data.UserHoursOfAvailability;
-import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 import com.capgemini.jst.SpringCapmates.repositories.UserHoursOfAvailabilityDao;
 import com.capgemini.jst.SpringCapmates.services.UserHoursOfAvailabilityService;
-import com.capgemini.jst.SpringCapmates.services.UserProfileService;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserHoursOfAvailabilityDto;
 
 @RunWith(SpringRunner.class)
@@ -49,21 +45,37 @@ public class UserHoursOfAvailabilityTest {
 	}
 
 	@Test
-	public void addUserHoursOfAvailabilityTest(){
-		//given
-		//added object will be on 9th place in the list
+	public void addUserHoursOfAvailabilityTest() {
+		// given
+		// added object will be on 9th place in the list
 		LocalTime from10 = LocalTime.of(11, 30);
 		LocalTime to10 = LocalTime.of(12, 30);
 		LocalDate date10 = LocalDate.of(2018, 12, 25);
-		UserHoursOfAvailabilityDto givenUserHoursOfAvailabilityDto = new UserHoursOfAvailabilityDto(from10,to10, date10, 1L);
+		UserHoursOfAvailabilityDto givenUserHoursOfAvailabilityDto = new UserHoursOfAvailabilityDto(from10, to10,
+				date10, 1L);
+		// when
+
+		userHoursOfAvailabilityService.addUserHoursOfAvailability(givenUserHoursOfAvailabilityDto);
+		// then
+		assertEquals(givenUserHoursOfAvailabilityDto.getDate(), userHoursOfAvailabilityDao.findAll().get(9).getDate());
+		assertEquals(givenUserHoursOfAvailabilityDto.getComment(),
+				userHoursOfAvailabilityDao.findAll().get(9).getComment());
+		assertEquals(givenUserHoursOfAvailabilityDto.getFrom(), userHoursOfAvailabilityDao.findAll().get(9).getFrom());
+		assertEquals(givenUserHoursOfAvailabilityDto.getTo(), userHoursOfAvailabilityDao.findAll().get(9).getTo());
+		assertEquals(givenUserHoursOfAvailabilityDto.getUserId(),
+				userHoursOfAvailabilityDao.findAll().get(9).getUserId());
+	}
+
+	@Test
+	public void deleteUserHoursOfAvailabilityTest(){
+		//given
+		Long hoursId = 10L;
+		String comment = "bo tak";
 		//when
 		
-		userHoursOfAvailabilityService.addUserHoursOfAvailability(givenUserHoursOfAvailabilityDto);
+		userHoursOfAvailabilityService.deleteUserHoursOfAvailability(hoursId, comment);
 		//then
-		assertEquals(givenUserHoursOfAvailabilityDto.getDate(),userHoursOfAvailabilityDao.findAll().get(9).getDate());
-		assertEquals(givenUserHoursOfAvailabilityDto.getComment(),userHoursOfAvailabilityDao.findAll().get(9).getComment());
-		assertEquals(givenUserHoursOfAvailabilityDto.getFrom(),userHoursOfAvailabilityDao.findAll().get(9).getFrom());
-		assertEquals(givenUserHoursOfAvailabilityDto.getTo(),userHoursOfAvailabilityDao.findAll().get(9).getTo());
-		assertEquals(givenUserHoursOfAvailabilityDto.getUserId(),userHoursOfAvailabilityDao.findAll().get(9).getUserId());
+		assertEquals(comment,userHoursOfAvailabilityDao.find(hoursId).getComment());
+		assertEquals(false,userHoursOfAvailabilityDao.find(hoursId).isActive());
 	}
 }

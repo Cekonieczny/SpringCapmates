@@ -37,6 +37,7 @@ public class UserGameCollectionService {
 		for (Game game : availableGames) {
 			if (gameId.equals(game.getGameId())) {
 				newGameInUserCollection = game;
+				break;
 			} else {
 				throw new Exception("There is no such game in general collection");
 			}

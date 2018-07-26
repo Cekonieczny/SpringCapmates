@@ -1,8 +1,5 @@
 package com.capgemini.jst.SpringCapmates.transferObjects;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 
 public class GameDto {
 	private String gameName;

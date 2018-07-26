@@ -2,17 +2,13 @@ package com.capgemini.jst.SpringCapmates.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.LinkedList;
-import java.util.List;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.capgemini.jst.SpringCapmates.data.Game;
-import com.capgemini.jst.SpringCapmates.data.User;
 import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 import com.capgemini.jst.SpringCapmates.services.UserProfileService;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserProfileDto;
@@ -30,14 +26,10 @@ public class UserProfileServiceTest {
 	
 	@Test public void getUserProfileTest(){
 		//given
-		List<Game> gameCollection2 = new LinkedList<>();
-		gameCollection2.add(new Game(1L, "Agricola", 1, 4));
-		gameCollection2.add(new Game(5L, "Scythe", 2, 4));
-		gameCollection2.add(new Game(4L, "Gaia Project", 2, 5));
-		UserProfileDto givenUserProfile = new UserProfileDto("Jan", "Nowak", "jan.nowak@abc.com", "hfdfd123", "motto41");
+		UserProfileDto givenUserProfile = new UserProfileDto("Wojciech", "Truskawski", "truskawski.wojciech@abc.com","hasl13",  "motto71");
 		
 		//when
-		UserProfileDto userProfileDto = userProfileService.getUserProfile(2L);
+		UserProfileDto userProfileDto = userProfileService.getUserProfile(5L);
 		
 		//then
 		assertEquals(givenUserProfile.geteMailAddress(),userProfileDto.geteMailAddress());

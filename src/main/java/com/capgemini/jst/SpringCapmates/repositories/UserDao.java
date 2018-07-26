@@ -40,13 +40,13 @@ public class UserDao {
 		gameCollection6.add(new Game(4L, "Gaia Project", 2, 5));
 		List<Game> gameCollection7 = new LinkedList<>();
 		List<Game> gameCollection8 = new LinkedList<>();
-		gameCollection1.add(new Game(5L, "Scythe", 2, 4));
-		gameCollection1.add(new Game(3L, "Gloomhaven", 2, 4));
-		gameCollection1.add(new Game(4L, "Gaia Project", 2, 4));
+		gameCollection8.add(new Game(5L, "Scythe", 2, 4));
+		gameCollection8.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection8.add(new Game(4L, "Gaia Project", 2, 4));
 		List<Game> gameCollection9 = new LinkedList<>();
-		gameCollection1.add(new Game(5L, "Scythe", 2, 4));
-		gameCollection1.add(new Game(3L, "Gloomhaven", 2, 4));
-		gameCollection1.add(new Game(4L, "Gaia Project", 2, 4));
+		gameCollection9.add(new Game(5L, "Scythe", 2, 4));
+		gameCollection9.add(new Game(3L, "Gloomhaven", 2, 4));
+		gameCollection9.add(new Game(4L, "Gaia Project", 2, 4));
 		listOfUsers.add(new User(1L, "Jan", "Kowalski", "haslo123", "jan.kowalski@abc.com", "motto1", gameCollection1));
 		listOfUsers
 				.add(new User(2L, "Jan", "Nowak", "hfdfd123", "jan.nowak@abc.com", "motto41", gameCollection2));

@@ -37,7 +37,7 @@ public class GameCollectionServiceTest {
 		userGameCollectionService.addGameToUserCollection(userId,gameId);
 		User user = userDao.find(userId);
 		//then
-		assertEquals(gameId,user.getGameCollection().get(0).getGameId());
+		assertEquals(gameId,user.getGameCollection().get(3).getGameId());
 	}
 
 

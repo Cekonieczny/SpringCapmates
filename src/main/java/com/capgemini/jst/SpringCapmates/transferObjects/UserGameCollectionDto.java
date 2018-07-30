@@ -14,6 +14,9 @@ public class UserGameCollectionDto {
 		this.userId = userId;
 		this.gameCollection = gameCollection;
 	}
+	public UserGameCollectionDto(){
+		
+	}
 
 	public List<Game> getGameCollection() {
 		return gameCollection;

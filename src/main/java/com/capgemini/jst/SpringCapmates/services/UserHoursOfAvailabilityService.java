@@ -45,23 +45,29 @@ public class UserHoursOfAvailabilityService {
 		return userHours;
 	}
 
-	private List<ChallengeDto> createChallenges(Long userId) {
-		List<ChallengeDto> listOfChallenges = new LinkedList<>();
-
-		for (Long matchedUserId : listOfMatchedUsers) {
-			ChallengeDto challengeDto = new ChallengeDto(matchedUserId, userId,
-					userHoursOfAvailabilityDao.find(matchedUserId).getFrom(),
-					userHoursOfAvailabilityDao.find(matchedUserId).getTo(),
-					userHoursOfAvailabilityDao.find(matchedUserId).getDate());
-			listOfChallenges.add(challengeDto);
-
+	private List<Long> findMatchingUsers(Long userId, long durationOfGameInMinutes) {
+	
+		List<UserHoursOfAvailability> hoursByUser = userHoursOfAvailabilityDao.filterByUserId(userId);
+		List<Long> listOfMatchingUsersId = new LinkedList<>();
+	
+		for (UserHoursOfAvailability specificUserhours : hoursByUser) {
+			LocalDate specificUserDate = specificUserhours.getDate();
+			UserHoursOfAvailability specificUserHoursOfAvailability = specificUserhours;
+			for (UserHoursOfAvailability allHours : userHoursOfAvailabilityDao.findAll()) {
+				if (allHours.getUserId() != userId && specificUserDate.isEqual(allHours.getDate())) {
+					if (areHoursMatching(durationOfGameInMinutes, specificUserHoursOfAvailability, allHours)) {
+						listOfMatchingUsersId.add(allHours.getUserId());
+					}
+				}
+			}
 		}
-		return listOfChallenges;
+	
+		return listOfMatchingUsersId;
 	}
 
 	private boolean areHoursMatching(long durationOfGameInMinutes, UserHoursOfAvailability userHoursOfAvailability1,
 			UserHoursOfAvailability userHoursOfAvailability2) {
-
+	
 		long commonPeriodOfTime = 0;
 		
 		/*long from1 = Time.valueOf(userHoursOfAvailability1.getFrom()).getTime();
@@ -73,39 +79,39 @@ public class UserHoursOfAvailabilityService {
 			
 		}
 		else if(from1)*/
-
+	
 		if (userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getFrom())
 				|| userHoursOfAvailability2.getTo().isBefore(userHoursOfAvailability1.getFrom())) {
 			return false;
-
+	
 		} else if (userHoursOfAvailability1.getFrom().equals(userHoursOfAvailability2.getTo()) 
 				|| userHoursOfAvailability2.getFrom().equals(userHoursOfAvailability1.getTo()) ) {
 			return false;
-
+	
 		} else if ((userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getTo()))
 				&& userHoursOfAvailability1.getTo().isAfter(userHoursOfAvailability2.getFrom())) {
-
+	
 			commonPeriodOfTime = Duration.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability1.getTo())
 					.toMinutes();
-
+	
 		} else if (userHoursOfAvailability2.getTo().isBefore(userHoursOfAvailability1.getTo())
 				&& userHoursOfAvailability2.getTo().isAfter(userHoursOfAvailability1.getFrom())) {
-
+	
 			commonPeriodOfTime = Duration.between(userHoursOfAvailability1.getFrom(), userHoursOfAvailability2.getTo())
 					.toMinutes();
-
+	
 		}else if ((userHoursOfAvailability1.getTo().equals(userHoursOfAvailability2.getTo()))
 				&& userHoursOfAvailability1.getTo().isAfter(userHoursOfAvailability2.getFrom())) {
-
+	
 			commonPeriodOfTime = Duration.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability1.getTo())
 					.toMinutes();
-
+	
 		} else if (userHoursOfAvailability2.getTo().equals(userHoursOfAvailability1.getTo())
 				&& userHoursOfAvailability2.getTo().isAfter(userHoursOfAvailability1.getFrom())) {
-
+	
 			commonPeriodOfTime = Duration.between(userHoursOfAvailability1.getFrom(), userHoursOfAvailability2.getTo())
 					.toMinutes();
-
+	
 		}else if (userHoursOfAvailability1.getFrom().equals(userHoursOfAvailability2.getFrom())) {
 			if (userHoursOfAvailability1.getTo().isBefore(userHoursOfAvailability2.getTo())) {
 				commonPeriodOfTime = Duration
@@ -119,32 +125,26 @@ public class UserHoursOfAvailabilityService {
 						.between(userHoursOfAvailability2.getFrom(), userHoursOfAvailability2.getTo()).toMinutes();
 			}
 		}
-
+	
 		if (commonPeriodOfTime >= durationOfGameInMinutes) {
 			return true;
 		}
-
+	
 		return false;
-
+	
 	}
 
-	private List<Long> findMatchingUsers(Long userId, long durationOfGameInMinutes) {
+	private List<ChallengeDto> createChallenges(Long userId) {
+		List<ChallengeDto> listOfChallenges = new LinkedList<>();
 
-		List<UserHoursOfAvailability> hoursByUser = userHoursOfAvailabilityDao.filterByUserId(userId);
-		List<Long> listOfMatchingUsersId = new LinkedList<>();
+		for (Long matchedUserId : listOfMatchedUsers) {
+			ChallengeDto challengeDto = new ChallengeDto(matchedUserId, userId,
+					userHoursOfAvailabilityDao.find(matchedUserId).getFrom(),
+					userHoursOfAvailabilityDao.find(matchedUserId).getTo(),
+					userHoursOfAvailabilityDao.find(matchedUserId).getDate());
+			listOfChallenges.add(challengeDto);
 
-		for (UserHoursOfAvailability specificUserhours : hoursByUser) {
-			LocalDate specificUserDate = specificUserhours.getDate();
-			UserHoursOfAvailability specificUserHoursOfAvailability = specificUserhours;
-			for (UserHoursOfAvailability allHours : userHoursOfAvailabilityDao.findAll()) {
-				if (allHours.getUserId() != userId && specificUserDate.isEqual(allHours.getDate())) {
-					if (areHoursMatching(durationOfGameInMinutes, specificUserHoursOfAvailability, allHours)) {
-						listOfMatchingUsersId.add(allHours.getUserId());
-					}
-				}
-			}
 		}
-
-		return listOfMatchingUsersId;
+		return listOfChallenges;
 	}
 }

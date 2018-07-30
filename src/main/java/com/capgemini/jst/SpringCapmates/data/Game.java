@@ -12,6 +12,12 @@ public class Game {
 		this.minimalNumberOfPlayers = minimalNumberOfPlayers;
 		this.maximalNumberOfPlayers = maximalNumberOfPlayers;
 	}
+	
+	public Game(String gameName,int minimalNumberOfPlayers, int maximalNumberOfPlayers) {
+		this.gameName = gameName;
+		this.minimalNumberOfPlayers = minimalNumberOfPlayers;
+		this.maximalNumberOfPlayers = maximalNumberOfPlayers;
+	}
 
 	public Game() {
 	}

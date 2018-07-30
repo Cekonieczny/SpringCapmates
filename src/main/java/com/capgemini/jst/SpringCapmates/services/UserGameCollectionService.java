@@ -1,12 +1,15 @@
 package com.capgemini.jst.SpringCapmates.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.commons.text.similarity.JaroWinklerDistance;
 import com.capgemini.jst.SpringCapmates.data.Game;
 import com.capgemini.jst.SpringCapmates.mappers.GameMapper;
 import com.capgemini.jst.SpringCapmates.mappers.UserMapper;
+import com.capgemini.jst.SpringCapmates.transferObjects.FindGameByParamsRequestDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
 import com.capgemini.jst.SpringCapmates.repositories.GamesDao;
@@ -27,6 +30,10 @@ public class UserGameCollectionService {
 		this.gameMapper = gameMapper;
 	}
 
+	public List<Game> getGeneralGameCollection() {
+		return gamesDao.findAll();
+	}
+
 	public void addGameToUserCollection(Long userId, Long gameId) throws Exception {
 		List<Game> availableGames = gamesDao.findAll();
 
@@ -37,11 +44,12 @@ public class UserGameCollectionService {
 		for (Game game : availableGames) {
 			if (gameId.equals(game.getGameId())) {
 				newGameInUserCollection = game;
-				break;
-			} else {
-				throw new Exception("There is no such game in general collection");
 			}
 		}
+		if (newGameInUserCollection == null) {
+			throw new Exception("There is no such game in general collection");
+		}
+
 		for (Game game : userGameCollection) {
 			if (gameId.equals(game.getGameId())) {
 				throw new Exception("This game already exists in user collection");
@@ -77,14 +85,48 @@ public class UserGameCollectionService {
 
 	}
 
-	public UserGameCollectionDto getGameCollection(Long userId) {
+	public UserGameCollectionDto getUserGameCollection(Long userId) {
 		return userMapper.mapUserToUserGameCollectionDto(userDao.find(userId));
 	}
 
-	public void AddNewGameToGeneralCollection(GameDto gameDto) {
+	public void addNewGameToGeneralCollection(GameDto gameDto) {
 		Game game = new Game();
-		gameMapper.mapGameDtoToGame(gameDto, game);
+		game = gameMapper.mapGameDtoToGame(gameDto, game);
 		gamesDao.create(game);
+	}
+
+	public List<Game> findGameByParams(FindGameByParamsRequestDto findGameByParamsRequestDto) {
+		List<Game> listToFilter = gamesDao.findAll();
+
+		if (findGameByParamsRequestDto.getGameNameLike() != null) {
+			listToFilter = filterByGameNames(listToFilter, findGameByParamsRequestDto.getGameNameLike());
+		}
+		if (findGameByParamsRequestDto.getMinimalNumberOfPlayers() != null) {
+			listToFilter = filterByMinimalNumberOfPlayers(listToFilter,
+					findGameByParamsRequestDto.getMinimalNumberOfPlayers());
+		}
+		if (findGameByParamsRequestDto.getMaximalNumberOfPlayers() != null) {
+			listToFilter = filterByMaximalNumberOfPlayers(listToFilter,
+					findGameByParamsRequestDto.getMaximalNumberOfPlayers());
+		}
+		return listToFilter;
+	}
+
+	private List<Game> filterByGameNames(List<Game> listToFilter, String gameNameLike) {
+		JaroWinklerDistance jaroWinklerDistance = new JaroWinklerDistance();
+
+		return listToFilter.stream().filter(p -> jaroWinklerDistance.apply(p.getGameName(), gameNameLike) >= 0.7)
+				.collect(Collectors.toList());
+	}
+
+	private List<Game> filterByMinimalNumberOfPlayers(List<Game> listToFilter, Integer minPlayers) {
+		return listToFilter.stream().filter(p -> p.getMinimalNumberOfPlayers() == (minPlayers.intValue()))
+				.collect(Collectors.toList());
+	}
+
+	private List<Game> filterByMaximalNumberOfPlayers(List<Game> listToFilter, Integer maxPlayers) {
+		return listToFilter.stream().filter(p -> p.getMaximalNumberOfPlayers() == (maxPlayers.intValue()))
+				.collect(Collectors.toList());
 	}
 
 }

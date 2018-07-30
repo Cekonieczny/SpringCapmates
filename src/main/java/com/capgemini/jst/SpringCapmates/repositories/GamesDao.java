@@ -13,7 +13,7 @@ public class GamesDao {
 	private GamesDao() {
 		listOfGames = new LinkedList<>();
 		listOfGames.add(new Game(1L, "Agricola", 1, 4));
-		listOfGames.add(new Game(2L, "Civilization", 2, 4));
+		listOfGames.add(new Game(2L, "Civilization", 2, 5));
 		listOfGames.add(new Game(3L, "Gloomhaven", 2, 4));
 		listOfGames.add(new Game(4L, "Gaia Project", 2, 4));
 		listOfGames.add(new Game(5L, "Scythe", 2, 4));

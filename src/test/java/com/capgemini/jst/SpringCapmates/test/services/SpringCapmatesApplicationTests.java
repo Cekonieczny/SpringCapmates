@@ -1,4 +1,4 @@
-package com.capgemini.jst.SpringCapmates.test;
+package com.capgemini.jst.SpringCapmates.test.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

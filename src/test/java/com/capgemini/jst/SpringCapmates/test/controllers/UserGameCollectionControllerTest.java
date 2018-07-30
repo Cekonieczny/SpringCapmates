@@ -1,6 +1,6 @@
 package com.capgemini.jst.SpringCapmates.test.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.util.LinkedList;
@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import static org.hamcrest.Matchers.*;
+import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
 import com.capgemini.jst.SpringCapmates.SpringCapmatesApplication;
 import com.capgemini.jst.SpringCapmates.controllers.GameCollectionController;
 import com.capgemini.jst.SpringCapmates.data.Game;
@@ -69,10 +70,12 @@ public class UserGameCollectionControllerTest {
 		// then
 		resultActions.andExpect(jsonPath("$[0].gameId").value(expectedGame.getGameId()));
 		resultActions.andExpect(jsonPath("$[0].gameName").value(expectedGame.getGameName()));
-		resultActions.andExpect(jsonPath("$[0].minimalNumberOfPlayers").value(expectedGame.getMinimalNumberOfPlayers()));
-		resultActions.andExpect(jsonPath("$[0].maximalNumberOfPlayers").value(expectedGame.getMaximalNumberOfPlayers()));
+		resultActions
+				.andExpect(jsonPath("$[0].minimalNumberOfPlayers").value(expectedGame.getMinimalNumberOfPlayers()));
+		resultActions
+				.andExpect(jsonPath("$[0].maximalNumberOfPlayers").value(expectedGame.getMaximalNumberOfPlayers()));
 	}
-	
+
 	@Test
 	public void shouldGenerateListOfGamesWithOneParamOnly() throws Exception {
 		// given
@@ -94,28 +97,36 @@ public class UserGameCollectionControllerTest {
 		resultActions.andExpect(jsonPath("$[0].gameName").value(list.get(0).getGameName()));
 		resultActions.andExpect(jsonPath("$[0].minimalNumberOfPlayers").value(list.get(0).getMinimalNumberOfPlayers()));
 		resultActions.andExpect(jsonPath("$[0].maximalNumberOfPlayers").value(list.get(0).getMaximalNumberOfPlayers()));
-		resultActions.andExpect(jsonPath("$",hasSize(4)));
-		
+		resultActions.andExpect(jsonPath("$", hasSize(4)));
+
 	}
-	
-	/*@Test
+
+	@Test
 	public void shouldGetGameCollectionByUserId() throws Exception {
 		// given
-		String mockRequestBodyAsString = "{\"gameNameLike\":\"aicola\",\"minimalNumberOfPlayers\":\"1\",\"maximalNumberOfPlayers\":\"4\"}";
-		Game expectedGame = new Game("Agricola", 1, 4);
 		List<Game> list = new LinkedList<>();
-		list.add(expectedGame);
+		UserGameCollectionDto userGameCollectionDto = new UserGameCollectionDto();
+		list.add(new Game(1L, "Agricola", 1, 4));
+		list.add(new Game(2L, "Gloomhaven", 2, 4));
+		list.add(new Game(3L, "Chaos in The Old World", 2, 5));
+		list.add(new Game(4L, "Project Gaia", 1, 4));
+		Long userId = 213L;
+		userGameCollectionDto.setGameCollection(list);
+		userGameCollectionDto.setUserId(userId);
 
-		Mockito.when((userGameCollectionService.findGameByParams(Mockito.any()))).thenReturn(list);
+		Mockito.when((userGameCollectionService.getUserGameCollection(userId))).thenReturn(userGameCollectionDto);
 
 		// when
-		ResultActions resultActions = mockMvc.perform(post("/user/game-collection/find-by-param")
-				.contentType(MediaType.APPLICATION_JSON_VALUE).content(mockRequestBodyAsString.getBytes()));
+		ResultActions resultActions = mockMvc.perform(get("/user/game-collection/213"));
 
 		// then
-		resultActions.andExpect(jsonPath("gameName").value(expectedGame.getGameName()));
-		resultActions.andExpect(jsonPath("minimalNumberOfPlayers").value(expectedGame.getMinimalNumberOfPlayers()));
-		resultActions.andExpect(jsonPath("maximalNumberOfPlayers").value(expectedGame.getMaximalNumberOfPlayers()));
-	}*/
+		resultActions.andExpect(jsonPath("userId").value(userId));
+		resultActions.andExpect(jsonPath("$.gameCollection", hasSize(4)));
+		resultActions.andExpect(jsonPath("$.gameCollection[1].gameId").value("2"));
+		resultActions.andExpect(jsonPath("$.gameCollection[2].gameName").value("Chaos in The Old World"));
+		resultActions.andExpect(jsonPath("$.gameCollection[3].gameName").value("Project Gaia"));
+		resultActions.andExpect(jsonPath("$.gameCollection[3].minimalNumberOfPlayers").value("1"));
+		resultActions.andExpect(jsonPath("$.gameCollection[3].maximalNumberOfPlayers").value("4"));
+	}
 
 }

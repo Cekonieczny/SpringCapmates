@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.capgemini.jst.SpringCapmates.data.Game;
+import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.services.UserGameCollectionService;
 import com.capgemini.jst.SpringCapmates.transferObjects.FindGameByParamsRequestDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
@@ -34,7 +35,7 @@ public class GameCollectionController {
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public UserGameCollectionDto getGameCollectionByUserId(@PathVariable Long userId) {
+	public UserGameCollectionDto getGameCollectionByUserId(@PathVariable Long userId) throws NoSuchElementInDatabaseException {
 		return userGameCollectionService.getUserGameCollection(userId);
 	}
 
@@ -56,8 +57,14 @@ public class GameCollectionController {
 
 	@RequestMapping(value = "/add-game", method = RequestMethod.PUT)
 	public void addGameToUserCollection(@RequestParam Long userId, @RequestParam Long gameId)
-			throws Exception {
+			throws NoSuchElementInDatabaseException {
 		userGameCollectionService.addGameToUserCollection(userId, gameId);
+	}
+	
+	@RequestMapping(value = "/delete-game", method = RequestMethod.DELETE)
+	public Game deleteGameFromUserCollection(@RequestParam Long userId, @RequestParam Long gameId)
+			throws NoSuchElementInDatabaseException {
+		return userGameCollectionService.removeGameFromUserCollection(userId, gameId);
 	}
 
 }

@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 import com.capgemini.jst.SpringCapmates.services.UserProfileService;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserProfileDto;
@@ -24,7 +26,7 @@ public class UserProfileServiceTest {
 	@Autowired
 	UserDao userDao;
 	
-	@Test public void getUserProfileTest(){
+	@Test public void getUserProfileTest() throws NoSuchElementInDatabaseException{
 		//given
 		UserProfileDto givenUserProfile = new UserProfileDto("Wojciech", "Truskawski", "truskawski.wojciech@abc.com","hasl13",  "motto71");
 		
@@ -39,7 +41,7 @@ public class UserProfileServiceTest {
 		assertEquals(givenUserProfile.getLifeMotto(),userProfileDto.getLifeMotto());
 	}
 	
-	@Test public void changeUserFirstNameTest(){
+	@Test public void changeUserFirstNameTest() throws NoSuchElementInDatabaseException{
 		//given
 		Long userId = 2L;
 		String newUserFirstName = "Bohdan";
@@ -51,7 +53,7 @@ public class UserProfileServiceTest {
 		assertEquals(newUserFirstName,userDao.find(userId).getUserFirstName());
 	}
 	
-	@Test public void changeUserLastNameTest(){
+	@Test public void changeUserLastNameTest() throws NoSuchElementInDatabaseException{
 		//given
 		Long userId = 2L;
 		String newUserLastName = "Kmicic";
@@ -63,7 +65,7 @@ public class UserProfileServiceTest {
 		assertEquals(newUserLastName,userDao.find(userId).getUserLastName());
 	}
 	
-	@Test public void changeUserEMailAddressTest(){
+	@Test public void changeUserEMailAddressTest() throws NoSuchElementInDatabaseException{
 		//given
 		Long userId = 2L;
 		String newUserEMail = "nowak.jan@abc.com";
@@ -75,7 +77,7 @@ public class UserProfileServiceTest {
 		assertEquals(newUserEMail,userDao.find(userId).getEMailAddress());
 	}
 	
-	@Test public void changeUserPassword(){
+	@Test public void changeUserPassword() throws NoSuchElementInDatabaseException{
 		//given
 		Long userId = 2L;
 		String newUserPassword = "haslo";
@@ -87,7 +89,7 @@ public class UserProfileServiceTest {
 		assertEquals(newUserPassword,userDao.find(userId).getPassword());
 	}
 	
-	@Test public void changeLifeMotto(){
+	@Test public void changeLifeMotto() throws NoSuchElementInDatabaseException{
 		//given
 		Long userId = 9L;
 		String newUserMotto = "mottoMotto";

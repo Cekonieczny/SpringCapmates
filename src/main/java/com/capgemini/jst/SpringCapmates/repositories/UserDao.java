@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import com.capgemini.jst.SpringCapmates.data.Game;
 import com.capgemini.jst.SpringCapmates.data.User;
+import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 
 @Repository
 public class UserDao {
@@ -66,13 +67,13 @@ public class UserDao {
 				new User(9L, "Michał", "Sliwinski", "has234", "michal.sliwinski@abc.com", "motto51", gameCollection9));
 	}
 
-	public User find(Long userId) {
+	public User find(Long userId) throws NoSuchElementInDatabaseException {
 		for (User user : listOfUsers) {
 			if (user.getUserId().equals(userId)) {
 				return user;
 			}
 		}
-		return null;
+		throw new NoSuchElementInDatabaseException();
 	}
 
 	public List<User> findAll() {
@@ -101,12 +102,11 @@ public class UserDao {
 		for (User tempUser : listOfUsers) {
 			if (tempUser.getUserId().equals(user.getUserId())) {
 				userToUpdate = tempUser;
+				break;
 			}
-			listOfUsers.remove(userToUpdate);
-			listOfUsers.add(user);
-			return;
 		}
-		
+		listOfUsers.remove(userToUpdate);
+		listOfUsers.add(user);
 	}
 
 }

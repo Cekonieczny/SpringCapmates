@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserProfileDto;
 import com.capgemini.jst.SpringCapmates.data.User;
+import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.mappers.UserMapper;
 import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 
@@ -18,12 +19,12 @@ public class UserProfileService {
 		this.userMapper = userMapper;
 	}
 
-	public UserProfileDto getUserProfile(Long userId) {
+	public UserProfileDto getUserProfile(Long userId) throws NoSuchElementInDatabaseException {
 		User user = userDao.find(userId);
 		return userMapper.mapUserToUserProfileDto(user);
 	}
 
-	public User changeUserFirstName(Long userId, String newUserFirstName) {
+	public User changeUserFirstName(Long userId, String newUserFirstName) throws NoSuchElementInDatabaseException {
 		User user = userDao.find(userId);
 		user.setUserFirstName(newUserFirstName);
 		userDao.update(user);
@@ -31,7 +32,7 @@ public class UserProfileService {
 
 	}
 
-	public User changeUserLastName(Long userId, String newUserLastName) {
+	public User changeUserLastName(Long userId, String newUserLastName) throws NoSuchElementInDatabaseException {
 		User user = userDao.find(userId);
 		user.setUserLastName(newUserLastName);
 		userDao.update(user);
@@ -39,7 +40,7 @@ public class UserProfileService {
 
 	}
 
-	public User changeUserPassword(Long userId, String newPassword) {
+	public User changeUserPassword(Long userId, String newPassword) throws NoSuchElementInDatabaseException {
 		User user = userDao.find(userId);
 		user.setPassword(newPassword);
 		userDao.update(user);
@@ -47,7 +48,7 @@ public class UserProfileService {
 
 	}
 
-	public User changeUserEmail(Long userId, String newEmailAddress) {
+	public User changeUserEmail(Long userId, String newEmailAddress) throws NoSuchElementInDatabaseException {
 		User user = userDao.find(userId);
 		user.setEMailAddress(newEmailAddress);
 		userDao.update(user);
@@ -55,7 +56,7 @@ public class UserProfileService {
 
 	}
 
-	public User changeUserLifeMotto(Long userId, String newLifeMotto) {
+	public User changeUserLifeMotto(Long userId, String newLifeMotto) throws NoSuchElementInDatabaseException {
 		User user = userDao.find(userId);
 		user.setLifeMotto(newLifeMotto);
 		userDao.update(user);

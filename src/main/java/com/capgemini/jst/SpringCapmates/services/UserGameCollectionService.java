@@ -2,11 +2,11 @@ package com.capgemini.jst.SpringCapmates.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.text.similarity.JaroWinklerDistance;
 import com.capgemini.jst.SpringCapmates.data.Game;
+import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.mappers.GameMapper;
 import com.capgemini.jst.SpringCapmates.mappers.UserMapper;
 import com.capgemini.jst.SpringCapmates.transferObjects.FindGameByParamsRequestDto;
@@ -34,7 +34,7 @@ public class UserGameCollectionService {
 		return gamesDao.findAll();
 	}
 
-	public void addGameToUserCollection(Long userId, Long gameId) throws Exception {
+	public void addGameToUserCollection(Long userId, Long gameId) throws NoSuchElementInDatabaseException {
 		List<Game> availableGames = gamesDao.findAll();
 
 		List<Game> userGameCollection = userDao.find(userId).getGameCollection();
@@ -47,12 +47,12 @@ public class UserGameCollectionService {
 			}
 		}
 		if (newGameInUserCollection == null) {
-			throw new Exception("There is no such game in general collection");
+			throw new NoSuchElementInDatabaseException();
 		}
 
 		for (Game game : userGameCollection) {
 			if (gameId.equals(game.getGameId())) {
-				throw new Exception("This game already exists in user collection");
+				throw new NoSuchElementInDatabaseException();
 			}
 		}
 		userGameCollection.add(newGameInUserCollection);
@@ -62,19 +62,21 @@ public class UserGameCollectionService {
 
 	}
 
-	public Game removeGameFromUserCollection(Long userId, Long gameId) throws Exception {
+	public Game removeGameFromUserCollection(Long userId, Long gameId) throws NoSuchElementInDatabaseException {
 		UserGameCollectionDto userGameCollectionDto = userMapper.mapUserToUserGameCollectionDto(userDao.find(userId));
 		List<Game> userGameCollection = userGameCollectionDto.getGameCollection();
-		Game removedGame = new Game();
+		Game removedGame = null;
 
 		for (Game game : userGameCollection) {
 			if (gameId.equals(game.getGameId())) {
 				removedGame = game;
-				userGameCollection.remove(game);
-			} else {
-				throw new Exception("There is no such game in user collection");
+				break;
 			}
 		}
+		if (removedGame == null) {
+			throw new NoSuchElementInDatabaseException();
+		}
+		userGameCollection.remove(removedGame);
 		userGameCollectionDto.setGameCollection(userGameCollection);
 		userGameCollectionDto.setUserId(userId);
 
@@ -82,10 +84,9 @@ public class UserGameCollectionService {
 				userDao.find(userGameCollectionDto.getUserId())));
 
 		return removedGame;
-
 	}
 
-	public UserGameCollectionDto getUserGameCollection(Long userId) {
+	public UserGameCollectionDto getUserGameCollection(Long userId) throws NoSuchElementInDatabaseException {
 		return userMapper.mapUserToUserGameCollectionDto(userDao.find(userId));
 	}
 

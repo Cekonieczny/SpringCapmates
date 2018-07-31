@@ -15,7 +15,7 @@ import com.capgemini.jst.SpringCapmates.data.User;
 import com.capgemini.jst.SpringCapmates.repositories.GamesDao;
 import com.capgemini.jst.SpringCapmates.repositories.UserDao;
 import com.capgemini.jst.SpringCapmates.services.UserGameCollectionService;
-import com.capgemini.jst.SpringCapmates.transferObjects.FindGameByParamsRequestDto;
+import com.capgemini.jst.SpringCapmates.transferObjects.FindGamesByParamsRequestDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
 
 @RunWith(SpringRunner.class)
@@ -62,9 +62,9 @@ public class GameCollectionServiceTest {
 	@Test
 	public void getFilteredGeneralCollection() {
 		// given
-		FindGameByParamsRequestDto findGameByParamsDto = new FindGameByParamsRequestDto("Aicola", 1, 4);
+		FindGamesByParamsRequestDto findGameByParamsDto = new FindGamesByParamsRequestDto("Aicola", 1, 4);
 		// when
-		List<Game> list = userGameCollectionService.findGameByParams(findGameByParamsDto);
+		List<Game> list = userGameCollectionService.findGamesByParams(findGameByParamsDto);
 		// then
 		System.out.println(list.iterator().next().getGameName());
 	}

@@ -82,7 +82,7 @@ public class UserDao {
 
 	public void create(User user) {
 		if (user.getUserId() != null) {
-			throw new IllegalArgumentException("User is already created, User is not null.");
+			throw new NoSuchElementInDatabaseException();
 		} else {
 			user.setUserId(System.currentTimeMillis());
 			listOfUsers.add(user);
@@ -91,9 +91,9 @@ public class UserDao {
 
 	public void delete(User user) {
 		if (user.getUserId() == null) {
-			throw new IllegalArgumentException("User is not present in database");
+			throw new NoSuchElementInDatabaseException();
 		} else {
-			listOfUsers.remove(user.getUserId());
+			listOfUsers.remove(user);
 		}
 	}
 

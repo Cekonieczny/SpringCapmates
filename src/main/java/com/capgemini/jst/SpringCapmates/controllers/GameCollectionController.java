@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.capgemini.jst.SpringCapmates.data.Game;
 import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.services.UserGameCollectionService;
-import com.capgemini.jst.SpringCapmates.transferObjects.FindGameByParamsRequestDto;
+import com.capgemini.jst.SpringCapmates.transferObjects.FindGamesByParamsRequestDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
 
@@ -44,24 +44,24 @@ public class GameCollectionController {
 		return userGameCollectionService.getGeneralGameCollection();
 	}
 
-	@RequestMapping(value = "/find-by-params", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/general/by-params", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public List<Game> getListOfGamesFilteredByGivenParams(
-			@RequestBody FindGameByParamsRequestDto findGameByParamsRequestDto) {
-		return userGameCollectionService.findGameByParams(findGameByParamsRequestDto);
+			@RequestBody FindGamesByParamsRequestDto findGamesByParamsRequestDto) {
+		return userGameCollectionService.findGamesByParams(findGamesByParamsRequestDto);
 	}
 
-	@RequestMapping(value = "/create-new-game", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/game", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void addNewGameToGeneralCollection(@RequestBody GameDto gameDto) {
 		userGameCollectionService.addNewGameToGeneralCollection(gameDto);
 	}
 
-	@RequestMapping(value = "/add-game", method = RequestMethod.PUT)
+	@RequestMapping(value = "/game", method = RequestMethod.PUT)
 	public void addGameToUserCollection(@RequestParam Long userId, @RequestParam Long gameId)
 			throws NoSuchElementInDatabaseException {
 		userGameCollectionService.addGameToUserCollection(userId, gameId);
 	}
 	
-	@RequestMapping(value = "/delete-game", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/game", method = RequestMethod.DELETE)
 	public Game deleteGameFromUserCollection(@RequestParam Long userId, @RequestParam Long gameId)
 			throws NoSuchElementInDatabaseException {
 		return userGameCollectionService.removeGameFromUserCollection(userId, gameId);

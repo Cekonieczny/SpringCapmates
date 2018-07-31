@@ -28,8 +28,21 @@ public class UserHoursOfAvailabilityService {
 
 	public List<Long> getListOfPlayersToChallenge(Long userId, long durationOfGameInMinutes) {
 		listOfMatchedUsers = findMatchingUsers(userId, durationOfGameInMinutes);
-		this.createChallenges(userId);
 		return listOfMatchedUsers;
+	}
+
+	public List<ChallengeDto> createChallenges(Long userId) {
+		List<ChallengeDto> listOfChallenges = new LinkedList<>();
+	
+		for (Long matchedUserId : listOfMatchedUsers) {
+			ChallengeDto challengeDto = new ChallengeDto(matchedUserId, userId,
+					userHoursOfAvailabilityDao.find(matchedUserId).getFrom(),
+					userHoursOfAvailabilityDao.find(matchedUserId).getTo(),
+					userHoursOfAvailabilityDao.find(matchedUserId).getDate());
+			listOfChallenges.add(challengeDto);
+	
+		}
+		return listOfChallenges;
 	}
 
 	public void addUserHoursOfAvailability(UserHoursOfAvailabilityDto userHoursOfAvailabilityDto) {
@@ -52,10 +65,9 @@ public class UserHoursOfAvailabilityService {
 	
 		for (UserHoursOfAvailability specificUserhours : hoursByUser) {
 			LocalDate specificUserDate = specificUserhours.getDate();
-			UserHoursOfAvailability specificUserHoursOfAvailability = specificUserhours;
 			for (UserHoursOfAvailability allHours : userHoursOfAvailabilityDao.findAll()) {
-				if (allHours.getUserId() != userId && specificUserDate.isEqual(allHours.getDate())) {
-					if (areHoursMatching(durationOfGameInMinutes, specificUserHoursOfAvailability, allHours)) {
+				if (!allHours.getUserId().equals(userId)&& specificUserDate.isEqual(allHours.getDate())) {
+					if (areHoursMatching(durationOfGameInMinutes, specificUserhours, allHours)) {
 						listOfMatchingUsersId.add(allHours.getUserId());
 					}
 				}
@@ -132,19 +144,5 @@ public class UserHoursOfAvailabilityService {
 	
 		return false;
 	
-	}
-
-	private List<ChallengeDto> createChallenges(Long userId) {
-		List<ChallengeDto> listOfChallenges = new LinkedList<>();
-
-		for (Long matchedUserId : listOfMatchedUsers) {
-			ChallengeDto challengeDto = new ChallengeDto(matchedUserId, userId,
-					userHoursOfAvailabilityDao.find(matchedUserId).getFrom(),
-					userHoursOfAvailabilityDao.find(matchedUserId).getTo(),
-					userHoursOfAvailabilityDao.find(matchedUserId).getDate());
-			listOfChallenges.add(challengeDto);
-
-		}
-		return listOfChallenges;
 	}
 }

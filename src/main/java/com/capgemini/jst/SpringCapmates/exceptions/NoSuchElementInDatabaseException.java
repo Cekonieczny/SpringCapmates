@@ -1,6 +1,6 @@
 package com.capgemini.jst.SpringCapmates.exceptions;
 
-public class NoSuchElementInDatabaseException extends Exception {
+public class NoSuchElementInDatabaseException extends RuntimeException {
 
 	/**
 	 * 

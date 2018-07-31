@@ -61,7 +61,7 @@ public class UserGameCollectionControllerTest {
 		List<Game> list = new LinkedList<>();
 		list.add(expectedGame);
 
-		Mockito.when((userGameCollectionService.findGameByParams(Mockito.any()))).thenReturn(list);
+		Mockito.when((userGameCollectionService.findGamesByParams(Mockito.any()))).thenReturn(list);
 
 		// when
 		ResultActions resultActions = mockMvc.perform(post("/user/game-collection/find-by-params")
@@ -86,7 +86,7 @@ public class UserGameCollectionControllerTest {
 		list.add(new Game("Project Gaia", 2, 5));
 		list.add(new Game("Gloomhaven", 2, 4));
 
-		Mockito.when((userGameCollectionService.findGameByParams(Mockito.any()))).thenReturn(list);
+		Mockito.when((userGameCollectionService.findGamesByParams(Mockito.any()))).thenReturn(list);
 
 		// when
 		ResultActions resultActions = mockMvc.perform(post("/user/game-collection/find-by-params")

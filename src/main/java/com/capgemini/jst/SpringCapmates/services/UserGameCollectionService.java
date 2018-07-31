@@ -9,7 +9,7 @@ import com.capgemini.jst.SpringCapmates.data.Game;
 import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.mappers.GameMapper;
 import com.capgemini.jst.SpringCapmates.mappers.UserMapper;
-import com.capgemini.jst.SpringCapmates.transferObjects.FindGameByParamsRequestDto;
+import com.capgemini.jst.SpringCapmates.transferObjects.FindGamesByParamsRequestDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.GameDto;
 import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
 import com.capgemini.jst.SpringCapmates.repositories.GamesDao;
@@ -96,19 +96,19 @@ public class UserGameCollectionService {
 		gamesDao.create(game);
 	}
 
-	public List<Game> findGameByParams(FindGameByParamsRequestDto findGameByParamsRequestDto) {
+	public List<Game> findGamesByParams(FindGamesByParamsRequestDto findGamesByParamsRequestDto) {
 		List<Game> listToFilter = gamesDao.findAll();
 
-		if (findGameByParamsRequestDto.getGameNameLike() != null) {
-			listToFilter = filterByGameNames(listToFilter, findGameByParamsRequestDto.getGameNameLike());
+		if (findGamesByParamsRequestDto.getGameNameLike() != null) {
+			listToFilter = filterByGameNames(listToFilter, findGamesByParamsRequestDto.getGameNameLike());
 		}
-		if (findGameByParamsRequestDto.getMinimalNumberOfPlayers() != null) {
+		if (findGamesByParamsRequestDto.getMinimalNumberOfPlayers() != null) {
 			listToFilter = filterByMinimalNumberOfPlayers(listToFilter,
-					findGameByParamsRequestDto.getMinimalNumberOfPlayers());
+					findGamesByParamsRequestDto.getMinimalNumberOfPlayers());
 		}
-		if (findGameByParamsRequestDto.getMaximalNumberOfPlayers() != null) {
+		if (findGamesByParamsRequestDto.getMaximalNumberOfPlayers() != null) {
 			listToFilter = filterByMaximalNumberOfPlayers(listToFilter,
-					findGameByParamsRequestDto.getMaximalNumberOfPlayers());
+					findGamesByParamsRequestDto.getMaximalNumberOfPlayers());
 		}
 		return listToFilter;
 	}

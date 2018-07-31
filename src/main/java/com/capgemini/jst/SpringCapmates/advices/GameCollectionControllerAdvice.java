@@ -62,10 +62,10 @@ public class GameCollectionControllerAdvice extends ResponseEntityExceptionHandl
 				.withDetail(supported + "/n" + "Provided Media Type: " + unsupported).build();
 
 		return new ResponseEntity<>(response, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
-	}*/
-
-	/*@ExceptionHandler(HttpMessageNotReadableException.class)
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+	}
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpServletRequest request) {
 
 		logger.error("Request: " + request.getRequestURL() + " raised " + ex);

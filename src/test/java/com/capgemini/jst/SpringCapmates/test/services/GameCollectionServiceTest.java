@@ -67,6 +67,7 @@ public class GameCollectionServiceTest {
 		List<Game> list = userGameCollectionService.findGamesByParams(findGameByParamsDto);
 		// then
 		System.out.println(list.iterator().next().getGameName());
+		System.out.println(list.iterator().next().getGameId());
 	}
 
 }

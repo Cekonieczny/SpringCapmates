@@ -2,7 +2,6 @@ package com.capgemini.jst.SpringCapmates.test.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import java.util.LinkedList;
 import java.util.List;
 import static org.mockito.Mockito.times;

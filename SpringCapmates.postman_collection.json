@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "d8b974af-895c-4ba1-9844-62591b10ba8d",
+		"name": "SpringCapmates",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "64a5adf0-dfa6-49d7-a860-e006ad5e59bf",
+			"name": "getGameCollectionByUserId7",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"7"
+					]
+				},
+				"description": "get an empty collection of user of id 7"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "209779d3-e3d2-437c-a91b-331893f5c69e",
+			"name": "getGameCollectionByUserId1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"1"
+					]
+				},
+				"description": "get a collection of games by user of id 1"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "699e3b32-e98c-4424-8366-352fd8682231",
+			"name": "findGameByParams-maxPlayersOnly=5",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n        \"maximalNumberOfPlayers\": 5\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/general/by-params",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"general",
+						"by-params"
+					]
+				},
+				"description": "maximalNumberOfPlayers only "
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "151edd42-7745-416a-b3e4-820d0b2722cc",
+			"name": "findGameByParams-maxPlayersOnly=4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n        \"maximalNumberOfPlayers\": 4\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/general/by-params",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"general",
+						"by-params"
+					]
+				},
+				"description": "maximalNumberOfPlayers only"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "1655b767-016e-42ba-9e9e-88f0f5c6a3b0",
+			"name": "findGameByParams-minPlayersOnly=2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n        \"minimalNumberOfPlayers\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/general/by-params",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"general",
+						"by-params"
+					]
+				},
+				"description": "minimalNumberOfPlayers only"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "3fc5f4d7-d05a-4af4-b8d3-c9cda826378f",
+			"name": "findGameByParams-wholeBody",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"gameNameLike\": \"civzation\",\n\t\t\"minimalNumberOfPlayers\": \"2\",\n\t\t\"maximalNumberOfPlayers\": \"5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/general/by-params",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"general",
+						"by-params"
+					]
+				},
+				"description": "only gameNameLike with not exactly matching string"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "e42c7d9c-8019-4b7b-81d8-07cc8340eba2",
+			"name": "addNewGameToGeneralGameCollection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"gameName\": \"Chaos in the old world\",\n        \"minimalNumberOfPlayers\": 2,\n        \"maximalNumberOfPlayers\": 5\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "2533084b-522f-4eb5-bd5a-ffb944cc607e",
+			"name": "addNewGameToUser7GameCollection",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/game?userId=7&gameId=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"game"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "7"
+						},
+						{
+							"key": "gameId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "d44db46f-4847-445f-9c26-504799a807c3",
+			"name": "getGeneralGameCollection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/general",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"general"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "d9517535-6407-4f23-b9a2-ebc9791ae625",
+			"name": "deleteGame2InUserCollection1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/user/game-collection/game?userId=1&gameId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"game-collection",
+						"game"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "gameId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

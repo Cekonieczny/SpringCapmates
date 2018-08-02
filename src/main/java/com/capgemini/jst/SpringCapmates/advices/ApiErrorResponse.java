@@ -1,6 +1,5 @@
 package com.capgemini.jst.SpringCapmates.advices;
 
-import org.springframework.http.HttpStatus;
 
 public class ApiErrorResponse {
 

@@ -95,7 +95,12 @@ public class UserGameCollectionService {
 		game = gameMapper.mapGameDtoToGame(gameDto, game);
 		gamesDao.create(game);
 	}
-
+/**
+ * Filters all games based on similiar names or/and 
+ * minimal number of players or/and maximal number of players
+ * @param findGamesByParamsRequestDto
+ * @return
+ */
 	public List<Game> findGamesByParams(FindGamesByParamsRequestDto findGamesByParamsRequestDto) {
 		List<Game> listToFilter = gamesDao.findAll();
 

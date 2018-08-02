@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -28,15 +29,17 @@ import com.capgemini.jst.SpringCapmates.transferObjects.UserGameCollectionDto;
 import com.capgemini.jst.SpringCapmates.SpringCapmatesApplication;
 import com.capgemini.jst.SpringCapmates.controllers.GameCollectionController;
 import com.capgemini.jst.SpringCapmates.data.Game;
+import com.capgemini.jst.SpringCapmates.exceptions.NoSuchElementInDatabaseException;
 import com.capgemini.jst.SpringCapmates.services.UserGameCollectionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SpringCapmatesApplication.class)
 @WebAppConfiguration
-public class UserGameCollectionControllerTest {
+public class GameCollectionControllerTest {
 
 	private MockMvc mockMvc;
-
+	
+	
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
@@ -45,7 +48,7 @@ public class UserGameCollectionControllerTest {
 
 	@Autowired
 	private GameCollectionController gameCollectionController;
-
+	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(userGameCollectionService);
@@ -194,7 +197,39 @@ public class UserGameCollectionControllerTest {
 		resultActions.andExpect(jsonPath("minimalNumberOfPlayers").value("1"));
 		resultActions.andExpect(jsonPath("maximalNumberOfPlayers").value("4"));
 	}
+	
+	@Test
+	public void shouldThrowArgumentTypeMismatchException() throws Exception {
+		// given
+		String mismatchedParameter = "mismatchedtypetest";
+		String path = "/user/game-collection/"+mismatchedParameter;
 
+		// when
+		ResultActions resultActions = mockMvc.perform(get(path));
+		// then
+		resultActions.andExpect(jsonPath("error_code").value(HttpStatus.BAD_REQUEST.getReasonPhrase()));
+		resultActions.andExpect(jsonPath("message")
+						.value("Failed to convert value of type '"
+						+ mismatchedParameter.getClass().getName().toString() +
+						"' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: "
+						+ "For input string: \""+mismatchedParameter+"\""));
+		resultActions.andExpect(jsonPath("detail").value("occured at:"+path));
+	}
+	
+	@Test
+	public void shouldThrowNoSuchElementInDatabaseException() throws Exception {
+		// given
+		Mockito.when(userGameCollectionService.getUserGameCollection(Mockito.any())).thenThrow(new NoSuchElementInDatabaseException());
+		String path  = "/user/game-collection/12312312";
+		// when
+		ResultActions resultActions = mockMvc.perform(get(path));
+		// then
+		resultActions.andExpect(jsonPath("error_code").value(HttpStatus.NOT_FOUND.getReasonPhrase()));
+		resultActions.andExpect(jsonPath("message")
+						.value("Requested element was not found in database"));
+		resultActions.andExpect(jsonPath("detail").value("occured at:"+path));
+	}
+	
 	private List<Game> generateListOfGames() {
 		List<Game> listOfGames = new LinkedList<>();
 		listOfGames.add(new Game(1L, "Agricola", 1, 4));
@@ -203,6 +238,5 @@ public class UserGameCollectionControllerTest {
 		listOfGames.add(new Game(4L, "Project Gaia", 1, 4));
 		listOfGames.add(new Game(5L, "Civilization", 2, 4));
 		return listOfGames;
-	}
-
+	}	
 }

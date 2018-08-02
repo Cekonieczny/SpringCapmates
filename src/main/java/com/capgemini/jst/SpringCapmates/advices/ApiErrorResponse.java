@@ -39,8 +39,6 @@ public class ApiErrorResponse {
 		this.detail = detail;
 	}
 
-
-	//Builder 
     public static final class ApiErrorResponseBuilder {
         private String error_code;
         private String message;
